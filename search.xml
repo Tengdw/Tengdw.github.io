@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[多重循环&数组]]></title>
+      <url>/2017/10/14/%E5%A4%9A%E9%87%8D%E5%BE%AA%E7%8E%AF-%E6%95%B0%E7%BB%84/</url>
+      <content type="html"><![CDATA[<h2 id="多重循环"><a href="#多重循环" class="headerlink" title="多重循环"></a>多重循环</h2><p>循环体中包含循环语句的结构称为多重循环。三种循环语句(while;do…while;for)可以自身嵌套，也可以相互嵌套，最常见的就是二重循环。在二重循环中，外层循环每执行一次，内层循环要执行一圈。</p>
+<blockquote>
+<p>例：打印10*10的点阵</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">for (int i = 1; i &lt;= 10; i++) &#123;</div><div class="line">	for (int j = 0; j &lt;= 10; j++) &#123;</div><div class="line">		System.out.print(&quot;* &quot;);</div><div class="line">	&#125;</div><div class="line">	System.out.println();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>控制台输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * *</div></pre></td></tr></table></figure></p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>数组是一个变量，存储相同数据类型的一组数据<br><em>数组的声明：</em></p>
+<ol>
+<li>声明一个变量是在内存空间划分出一块合适的空间</li>
+<li>声明一个数组是在内存空间划出一串连续的空间<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">int arr[];    //声明数组名</div><div class="line">arr = new int[5]    //分配5个数的存储空间</div><div class="line">arr[0]=2; arr[1]=4; ... ...arr[4]=4;    //赋值</div></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Java OOP]]></title>
+      <url>/2017/10/14/Java-OOP/</url>
+      <content type="html"><![CDATA[<p>Java OOP ( Object Oriented Program——面向对象编程 )，OOP的四大支柱：继承、封装、多态、抽象</p>
+<h2 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h2><ol>
+<li>类(Class)：定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。在Java中类包括属性和方法（构造方法）；构造方法没有返回值类型，也不能有返回值。父类中的构造方法不能被子类继承，即便它是public的</li>
+<li>对象：是类的实例。对象可以用来调用类里面的方法。</li>
+</ol>
+<h2 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h2><ol>
+<li>如果函数有相同的名称和返回值，而有不同的参数个数或参数类型，则这些函数就是重载函数。</li>
+<li>方法重载也称为静态多态。</li>
+<li>重载的三个特征：方法名相同、参数不同（包括参数数量不同、类型不同、顺序不同）、同一作用域。</li>
+</ol>
+<h2 id="继承-extends"><a href="#继承-extends" class="headerlink" title="继承(extends)"></a>继承(extends)</h2><ol>
+<li>继承的方法允许在不改动原程序的基础上对其进行扩充，这样使得原功能得以保存，而新功能也得以扩展。这有利于减少重复编码，提高软件的开发效率。</li>
+<li>一个类可以继承其它类的成员，被继承的类叫基类或父类；继承类叫派生类或子类。</li>
+<li>派生类不但拥有自己的成员变量和成员函数，还拥有父类的成员变量和成员函数。</li>
+</ol>
+<h2 id="重写"><a href="#重写" class="headerlink" title="重写"></a>重写</h2><ol>
+<li>父类与子类之间的多态性，对父类的函数进行重新定义。如果在子类中定义某方法与其父类有相同的名称和参数，我们说该方法被重写(Overriding)。在Java中，子类可继承父类中的方法，而不需要重新编写相同的方法。但有时子类并不想原封不动地继承父类的方法，而是想作一定的修改，这就需要采用方法的重写。方法重写又称方法覆盖。</li>
+<li>若子类中的方法与父类中的某一方法具有相同的方法名、返回类型和参数表，则新方法将覆盖原有的方法。如需父类中原有的方法，可使用super关键字，该关键字引用了当前类的父类。</li>
+<li>子类函数的访问修饰权限不能少于父类的。</li>
+</ol>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><ol>
+<li>多态存在的三个必要条件：继承、重写、父类引用指向子类对象</li>
+<li>多态的优点：消除类型之间的耦合关系、可替换性、可扩充性、接口性、灵活性、简化性</li>
+</ol>
+<h2 id="抽象类和接口"><a href="#抽象类和接口" class="headerlink" title="抽象类和接口"></a>抽象类和接口</h2><ol>
+<li>抽象类：class前面用abstract修饰、在方法前面加上abstract关键字，且没有实现、如果某各类中有抽象方法，这个类就是抽象方法</li>
+<li>抽象类特点：子类如果不实现父类的抽象方法，那么子类也是抽象类、不能创建对象，但是可以引用子类对象</li>
+<li>接口：定义语法：public interface 接口名{} 、接口中只能包含常量属性和未实现的方法</li>
+<li>接口的特点：接口的所有属性和方法必须用public修饰、不能new对象、接口可以继承多个接口</li>
+</ol>
+<h2 id="final和static修饰符"><a href="#final和static修饰符" class="headerlink" title="final和static修饰符"></a>final和static修饰符</h2><ol>
+<li>final：修饰属性：此变量不能被修改，一般是常量的修饰符；修饰方法：此方法不能被覆盖；修饰类：此类不能被继承。</li>
+<li>static：静态；在一个类中被修饰的变量和方法不需要引用可以直接调用。</li>
+</ol>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//懒汉式单例类.在第一次调用的时候实例化自己   </div><div class="line">public class Singleton &#123;  </div><div class="line">    private Singleton() &#123;&#125;  </div><div class="line">    private static Singleton single=null;  </div><div class="line">    public static Singleton getInstance() &#123;  </div><div class="line">         if (single == null) &#123;    </div><div class="line">             single = new Singleton();  </div><div class="line">         &#125;    </div><div class="line">        return single;  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">//饿汉式单例类.在类初始化时，已经自行实例化   </div><div class="line">public class Singleton1 &#123;  </div><div class="line">    private Singleton1() &#123;&#125;  </div><div class="line">    private static final Singleton1 single = new Singleton1();  </div><div class="line">    //静态工厂方法   </div><div class="line">    public static Singleton1 getInstance() &#123;  </div><div class="line">        return single;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Hello World]]></title>
+      <url>/2017/10/13/hello-world/</url>
+      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+  
+  
+</search>

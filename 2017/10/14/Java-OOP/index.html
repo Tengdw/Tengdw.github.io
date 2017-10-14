@@ -238,7 +238,7 @@
 
     
         <meta property="article:published_time" content="Fri Oct 13 2017 19:53:08 GMT+0000" />
-        <meta property="article:modified_time" content="Fri Oct 13 2017 19:54:44 GMT+0800" />
+        <meta property="article:modified_time" content="Sat Oct 14 2017 18:32:11 GMT+0800" />
     
 
     <!-- The Twitter Card protocol -->
@@ -265,7 +265,7 @@
     "mainEntityOfPage": "http://yoursite.com/2017/10/14/Java-OOP/index.html",
     "headline": "Java OOP",
     "datePublished": "Fri Oct 13 2017 19:53:08 GMT+0000",
-    "dateModified": "Fri Oct 13 2017 19:54:44 GMT+0800",
+    "dateModified": "Sat Oct 14 2017 18:32:11 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "Tengdw",
@@ -527,7 +527,7 @@
 <li>final：修饰属性：此变量不能被修改，一般是常量的修饰符；修饰方法：此方法不能被覆盖；修饰类：此类不能被继承。</li>
 <li>static：静态；在一个类中被修饰的变量和方法不需要引用可以直接调用。</li>
 </ol>
-<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//懒汉式单例类.在第一次调用的时候实例化自己   </div><div class="line">public class Singleton &#123;  </div><div class="line">    private Singleton() &#123;&#125;  </div><div class="line">    private static Singleton single=null;  </div><div class="line">    public static Singleton getInstance() &#123;  </div><div class="line">         if (single == null) &#123;    </div><div class="line">             single = new Singleton();  </div><div class="line">         &#125;    </div><div class="line">        return single;  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">//饿汉式单例类.在类初始化时，已经自行实例化   </div><div class="line">public class Singleton1 &#123;  </div><div class="line">    private Singleton1() &#123;&#125;  </div><div class="line">    private static final Singleton1 single = new Singleton1();  </div><div class="line">    //静态工厂方法   </div><div class="line">    public static Singleton1 getInstance() &#123;  </div><div class="line">        return single;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//懒汉式单例类.在第一次调用的时候实例化自己   </span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton single=<span class="keyword">null</span>;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">         <span class="keyword">if</span> (single == <span class="keyword">null</span>) &#123;    </div><div class="line">             single = <span class="keyword">new</span> Singleton();  </div><div class="line">         &#125;    </div><div class="line">        <span class="keyword">return</span> single;  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"><span class="comment">//饿汉式单例类.在类初始化时，已经自行实例化   </span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton1</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton1</span><span class="params">()</span> </span>&#123;&#125;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton1 single = <span class="keyword">new</span> Singleton1();  </div><div class="line">    <span class="comment">//静态工厂方法   </span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton1 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> single;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
         
     
@@ -654,7 +654,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">3</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">4</span></a>
             </ul>
         </li>
         
@@ -738,7 +738,7 @@
         <li>
             <a href="/archives">
                 文章总数
-                <span class="sidebar-badge">3</span>
+                <span class="sidebar-badge">4</span>
             </a>
         </li>
         

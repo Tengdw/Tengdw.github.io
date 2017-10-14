@@ -3,6 +3,32 @@
   
     
     <entry>
+      <title><![CDATA[梅林安装ss插件]]></title>
+      <url>/2017/10/15/%E6%A2%85%E6%9E%97%E5%AE%89%E8%A3%85ss%E6%8F%92%E4%BB%B6/</url>
+      <content type="html"><![CDATA[<p>前几天给K3刷了梅林固件（LEDE用起来太麻烦了），由于现在严查番羽墙梅林软件中心的ss插件被迫下架了，所以需要手动安装</p>
+<ol>
+<li>先启用梅林的SSH：系统管理-&gt;系统设置-&gt;SSH Daemon-&gt;Allow SSH Port Forwarding 选是再点击应用本页面设置</li>
+<li>用SSH客户端登录（地址：路由器的默认网关；用户名：默认是admin；密码：路由器的管理密码）然后一句一句执行下面命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cd /tmp</div><div class="line">wget http://valleyecho-1252960615.cosgz.myqcloud.com/shadowsocks.tar.gz</div><div class="line">tar -zxvf /tmp//shadowsocks.tar.gz    #解压</div><div class="line">chmod +x /tmp/shadowsocks/install.sh    #授予执行权限</div><div class="line">sh /tmp/shadowsocks/install.sh    #执行</div></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> 硬件玩家 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 路由器 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[多重循环&数组]]></title>
       <url>/2017/10/14/%E5%A4%9A%E9%87%8D%E5%BE%AA%E7%8E%AF-%E6%95%B0%E7%BB%84/</url>
       <content type="html"><![CDATA[<h2 id="多重循环"><a href="#多重循环" class="headerlink" title="多重循环"></a>多重循环</h2><p>循环体中包含循环语句的结构称为多重循环。三种循环语句(while;do…while;for)可以自身嵌套，也可以相互嵌套，最常见的就是二重循环。在二重循环中，外层循环每执行一次，内层循环要执行一圈。</p>
@@ -19,6 +45,12 @@
 </ol>
 ]]></content>
       
+        <categories>
+            
+            <category> Java学习 </category>
+            
+        </categories>
+        
         
         <tags>
             
@@ -65,9 +97,15 @@
 <li>final：修饰属性：此变量不能被修改，一般是常量的修饰符；修饰方法：此方法不能被覆盖；修饰类：此类不能被继承。</li>
 <li>static：静态；在一个类中被修饰的变量和方法不需要引用可以直接调用。</li>
 </ol>
-<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//懒汉式单例类.在第一次调用的时候实例化自己   </div><div class="line">public class Singleton &#123;  </div><div class="line">    private Singleton() &#123;&#125;  </div><div class="line">    private static Singleton single=null;  </div><div class="line">    public static Singleton getInstance() &#123;  </div><div class="line">         if (single == null) &#123;    </div><div class="line">             single = new Singleton();  </div><div class="line">         &#125;    </div><div class="line">        return single;  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">//饿汉式单例类.在类初始化时，已经自行实例化   </div><div class="line">public class Singleton1 &#123;  </div><div class="line">    private Singleton1() &#123;&#125;  </div><div class="line">    private static final Singleton1 single = new Singleton1();  </div><div class="line">    //静态工厂方法   </div><div class="line">    public static Singleton1 getInstance() &#123;  </div><div class="line">        return single;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//懒汉式单例类.在第一次调用的时候实例化自己   </span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton single=<span class="keyword">null</span>;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">         <span class="keyword">if</span> (single == <span class="keyword">null</span>) &#123;    </div><div class="line">             single = <span class="keyword">new</span> Singleton();  </div><div class="line">         &#125;    </div><div class="line">        <span class="keyword">return</span> single;  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"><span class="comment">//饿汉式单例类.在类初始化时，已经自行实例化   </span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton1</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton1</span><span class="params">()</span> </span>&#123;&#125;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton1 single = <span class="keyword">new</span> Singleton1();  </div><div class="line">    <span class="comment">//静态工厂方法   </span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton1 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> single;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 ]]></content>
       
+        <categories>
+            
+            <category> Java学习 </category>
+            
+        </categories>
+        
         
         <tags>
             

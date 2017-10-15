@@ -3,6 +3,158 @@
   
     
     <entry>
+      <title><![CDATA[选择&循环]]></title>
+      <url>/2017/10/16/Java%E9%80%89%E6%8B%A9&amp;%E5%BE%AA%E7%8E%AF/</url>
+      <content type="html"><![CDATA[<h3 id="单分支选择结构-if"><a href="#单分支选择结构-if" class="headerlink" title="单分支选择结构( if )"></a>单分支选择结构( if )</h3><p><strong>if选择结构是根据条件判断之后再做处理</strong></p>
+<div id="flowchart-0" class="flow-chart"></div>
+
+<h3 id="if-else多重选择结构"><a href="#if-else多重选择结构" class="headerlink" title="if-else多重选择结构"></a>if-else多重选择结构</h3><div id="flowchart-1" class="flow-chart"></div>
+
+<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><div id="flowchart-2" class="flow-chart"></div>
+
+<h3 id="do…while循环"><a href="#do…while循环" class="headerlink" title="do…while循环"></a>do…while循环</h3><div id="flowchart-3" class="flow-chart"></div>
+
+
+<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><div id="flowchart-4" class="flow-chart"></div>
+
+<h3 id="continue与break"><a href="#continue与break" class="headerlink" title="continue与break"></a>continue与break</h3><ul>
+<li>在程序中，如果程序执行过程中碰到break，则跳出循环。</li>
+<li>在程序执行过程中，如果碰到continue，则结束本次循环，继续下一轮循环。<br><script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 代码
+op=>operation: 代码块
+cond=>condition: 条件?
+e=>end: 代码
+
+st->cond->op->e
+cond(yes)->op
+cond(no)->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><textarea id="flowchart-1-code" style="display: none">st=>start: 代码...
+op=>operation: 代码块1
+op1=>operation: 代码块2
+cond=>condition: 条件?
+e=>end: 代码...
+
+st->cond->op->e
+cond(yes)->op
+cond(no)->op1->e</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script><textarea id="flowchart-2-code" style="display: none">st=>start: 开始循环
+cond=>condition: 循环条件
+op=>operation: 循环操作
+e=>end: 循环结束
+
+st->cond->op->cond
+cond(yes)->op
+cond(no)->e</textarea><textarea id="flowchart-2-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-2-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-2-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-2", options);</script><textarea id="flowchart-3-code" style="display: none">st=>start: 开始循环
+cond=>condition: 循环条件
+op=>operation: 循环操作
+e=>end: 循环结束
+
+st->op->cond
+cond(yes)->op
+cond(no)->e</textarea><textarea id="flowchart-3-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-3-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-3-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-3", options);</script><textarea id="flowchart-4-code" style="display: none">st=>start: 开始循环
+cond=>condition: 判断条件
+op=>operation: 循环体
+op1=>operation: 循环变量增（减）值
+op2=>operation: 赋循环变量初值
+e=>end: 代码...
+
+st->op2->cond->op->op1->op2
+cond(yes)->op
+cond(no)->e</textarea><textarea id="flowchart-4-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-4-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-4-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-4", options);</script></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Java学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Java基本数据类型、标识符、运算符]]></title>
+      <url>/2017/10/16/Java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E3%80%81%E6%A0%87%E8%AF%86%E7%AC%A6%E3%80%81%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
+      <content type="html"><![CDATA[<h2 id="八大基本数据类型和他们的封装类"><a href="#八大基本数据类型和他们的封装类" class="headerlink" title="八大基本数据类型和他们的封装类"></a>八大基本数据类型和他们的封装类</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">基本数据类型</th>
+<th style="text-align:left">封装类</th>
+<th style="text-align:left">二进制位数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">boolean(布尔型)</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:left">byte(字节)</td>
+<td style="text-align:left">Byte</td>
+<td style="text-align:left">8</td>
+</tr>
+<tr>
+<td style="text-align:left">char(字符型)</td>
+<td style="text-align:left">Character</td>
+<td style="text-align:left">16</td>
+</tr>
+<tr>
+<td style="text-align:left">short(短整型)</td>
+<td style="text-align:left">Short</td>
+<td style="text-align:left">16</td>
+</tr>
+<tr>
+<td style="text-align:left">int(整型)</td>
+<td style="text-align:left">Integer</td>
+<td style="text-align:left">32</td>
+</tr>
+<tr>
+<td style="text-align:left">long(长整型)</td>
+<td style="text-align:left">Long</td>
+<td style="text-align:left">64</td>
+</tr>
+<tr>
+<td style="text-align:left">float(浮点型)</td>
+<td style="text-align:left">Float</td>
+<td style="text-align:left">32</td>
+</tr>
+<tr>
+<td style="text-align:left">double(双精度)</td>
+<td style="text-align:left">Double</td>
+<td style="text-align:left">64</td>
+</tr>
+</tbody>
+</table>
+<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><p>1.标识符可以由字母、数字、下划线（_）、美元符（$）组成，但不能包含 @、            %、空格等其它特殊字符，不能以数字开头。<br>2.标识符不能是 Java 关键字和保留字（ Java 预留的关键字，以后的升级版本中有可能作为关键字），但可以包含关键字和保留字。<br>3.标识符是严格区分大小写的。例如：tengdw 与 Tengdw 是两个不同的标识符。</p>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ul>
+<li>关系运算符：== != &gt; &gt;= &lt; &lt;= </li>
+<li>逻辑运算符：&amp;&amp; || ! &amp; |</li>
+<li>赋值运算符：= += -= *= /= …</li>
+<li>算术运算符：+ - * / % – ++ </li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Java学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[CentOS常用基础命令整理]]></title>
       <url>/2017/10/15/CentOS%E5%B8%B8%E7%94%A8%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86/</url>
       <content type="html"><![CDATA[<p>CentOS（Community Enterprise Operating System，中文意思是：社区企业操作系统）是Linux发行版之一，它是来自于Red Hat Enterprise Linux依照开放源代码规定释出的源代码所编译而成。由于出自同样的源代码，因此有些要求高度稳定性的服务器以CentOS替代商业版的Red Hat Enterprise Linux使用。两者的不同，在于CentOS并不包含封闭源代码软件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Linux命令格式：命令 [选项] [参数]</div></pre></td></tr></table></figure></p>

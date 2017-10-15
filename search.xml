@@ -3,6 +3,209 @@
   
     
     <entry>
+      <title><![CDATA[CentOS常用基础命令整理]]></title>
+      <url>/2017/10/15/CentOS%E5%B8%B8%E7%94%A8%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86/</url>
+      <content type="html"><![CDATA[<p>CentOS（Community Enterprise Operating System，中文意思是：社区企业操作系统）是Linux发行版之一，它是来自于Red Hat Enterprise Linux依照开放源代码规定释出的源代码所编译而成。由于出自同样的源代码，因此有些要求高度稳定性的服务器以CentOS替代商业版的Red Hat Enterprise Linux使用。两者的不同，在于CentOS并不包含封闭源代码软件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Linux命令格式：命令 [选项] [参数]</div></pre></td></tr></table></figure></p>
+<h2 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h2><p>查询目录中的内容：ls [选项] [文件或目录]<br>选项：</p>
+<ul>
+<li>-a 显示所有文件，包括隐藏文件</li>
+<li>-t 显示所有文件，并以更改时间排序</li>
+<li>-l    显示详细信息(ls -l = ll)</li>
+<li>-h    人性化显示文件大小</li>
+<li>-i    显示inode</li>
+<li>-s   显示所有文件，并且以区块为单位的形式表示文件和目录大小</li>
+<li>-R   显示所有文件，并将所有子目录的文件都列出来</li>
+</ul>
+<h2 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h2><p>建立目录：mkdir -p [目录名] </p>
+<ul>
+<li>-p 递归创建(例：mkdir -p abc/def)</li>
+<li>命令英文原意：make directories</li>
+</ul>
+<h2 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h2><p>切换所在目录：cd  [目录]</p>
+<ul>
+<li>命令英文原意：change directory</li>
+<li>cd ~    进入当前用户的home目录</li>
+<li>cd –    进入上次目录</li>
+<li>cd ..    进入上一级目录</li>
+<li>cd .    进入当前目录</li>
+</ul>
+<h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><ul>
+<li>Linux靠权限来识别文件类型</li>
+<li>–rw-r-r–</li>
+<li>–文件类型（-文件 &nbsp; d 目录 &nbsp; i 软链接文件）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">rw-</th>
+<th style="text-align:left">r–</th>
+<th style="text-align:left">r-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">u所有者</td>
+<td style="text-align:left">g所属组</td>
+<td style="text-align:left">o其他人</td>
+</tr>
+<tr>
+<td style="text-align:left">r读</td>
+<td style="text-align:left">w写</td>
+<td style="text-align:left">x执行</td>
+</tr>
+</tbody>
+</table>
+<h3 id="相对路径与绝对路径"><a href="#相对路径与绝对路径" class="headerlink" title="相对路径与绝对路径"></a>相对路径与绝对路径</h3><ul>
+<li>相对路径：参照当前所在目录，进行查找 <blockquote>
+<p>如：[root@valleyecho ~]# cd ../var/www/html/</p>
+</blockquote>
+</li>
+<li>绝对路径：从根目录开始指定，一级一级递归查找。在任何目录下都能进入指定位置 <blockquote>
+<p>如：[root@valleyecho ~]# cd /var/</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a>rmdir</h2><p>删除空目录：rmdir [目录名]<br>命令英文原意：remove empty directories<br><em>只能删除空目录</em></p>
+<h2 id="rm-rf"><a href="#rm-rf" class="headerlink" title="rm -rf"></a>rm -rf</h2><p>删除文件或目录：rm -rf [文件或目录]<br>命令英文原意：remove<br>选项：</p>
+<ul>
+<li>-r 删除目录</li>
+<li>-f 强制（force）</li>
+</ul>
+<h2 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h2><p>复制命令：cp [选项] [原文件或目录] [目标目录]<br>命令英文原意：copy<br>选项：</p>
+<ul>
+<li>-r 复制目录</li>
+<li>-p 连带文件属性复制</li>
+<li>-d 若源文件是链接文件，则复制链接属性</li>
+<li>-a 相当于 -pdr</li>
+</ul>
+<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><p>剪切命令：mv  [原文件或目录] [目标目录]<br>命令英文原意：move<br><strong>mv  [原文件名或目录名] [新的文件名或目录名]  #实现重命名操作</strong></p>
+<h2 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h2><p>链接命令：ln  [原文件] [目标文件]<br>命令英文原意：link<br>功能描述：生成链接文件<br>选项：</p>
+<ul>
+<li>-s 创建软链接</li>
+</ul>
+<h3 id="硬链接与软链接"><a href="#硬链接与软链接" class="headerlink" title="硬链接与软链接"></a>硬链接与软链接</h3><ul>
+<li>硬链接特征：<ol>
+<li>拥有相同的i节点和存储block块，可以看做是同一个文件</li>
+<li>可通过i节点识别</li>
+<li>不能跨分区</li>
+<li>不能针对目录使用</li>
+</ol>
+</li>
+<li>软链接特征：<ol>
+<li>类似Windows快捷方式</li>
+<li>软链接拥有自己的i节点和block块，但是 数据块中只保存源文件的文件名和i节点号，并没有实际的文件数据</li>
+<li>lrwxrwxrwx &nbsp; l 软链接 软链接文件权限都为rwxrwxrwx</li>
+<li>修改任意文件，另一个都改变</li>
+<li>删除原文件，软链接不能使用</li>
+</ol>
+</li>
+</ul>
+<h2 id="locate"><a href="#locate" class="headerlink" title="locate"></a>locate</h2><p>文件搜索命令：locate  [文件名]<br>在后台数据库中按文件名搜索，搜索速度更快</p>
+<ul>
+<li>/var/lib/mlocate   &nbsp;   #locate命令所搜索的后台数据库</li>
+<li>updatedb  &nbsp; #更新数据库</li>
+</ul>
+<h2 id="whereis"><a href="#whereis" class="headerlink" title="whereis"></a>whereis</h2><p>搜索命令的命令：whereis</p>
+<ul>
+<li>whereis 命令名  &nbsp;  #搜索命令所在路径及帮助文档所在位置</li>
+<li>-b    只查找可执行文件</li>
+<li>-m    只查找帮助文件</li>
+</ul>
+<h2 id="which"><a href="#which" class="headerlink" title="which"></a>which</h2><p>搜索命令的命令：which</p>
+<ul>
+<li>which    命令名  &nbsp;  #搜索命令所在路径及别名</li>
+</ul>
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>搜索命令：find</p>
+<ul>
+<li>find [搜索范围] [搜索条件]    #搜索文件</li>
+<li>find / -name install.log<br><em>避免大范围搜索，会非常耗费系统资源</em><br><em>find是在系统当中搜索符合条件的文件名。如果需要匹配使用通配符，通配符是完全匹配的</em><br>Linux中的通配符：<ol>
+<li>* 匹配任意内容</li>
+<li>? 匹配任意一个字符</li>
+<li>[] 匹配任意一个中括号内的字符</li>
+</ol>
+</li>
+<li>find /toot -iname install.log  &nbsp;  #不区分大小写</li>
+<li>find /root -user root  &nbsp;  #按照所有者搜索</li>
+<li>find /root -nouser  &nbsp;  #查找没有所有者的文件</li>
+<li>find /var/log/ -mtime +10  &nbsp;  #查找10天前修改的文件<blockquote>
+<p>-10    10天内修改的文件<br>10    10天当天内修改的文件<br>+10    10前内修改的文件<br>atime    文件访问时间<br>ctime    改变文件属性<br>mtime    修改文件内容</p>
+</blockquote>
+</li>
+<li>find . -size 25k    #查找文件大小是25kb的文件（小k，大M）<blockquote>
+<p>-25  &nbsp;  小于25kb的文件<br>25   &nbsp;  等于25kb的文件<br>+25  &nbsp; 大于25kb的文件</p>
+</blockquote>
+</li>
+<li>find . -inum 262422  &nbsp;  #查找i节点是262422的文件</li>
+<li>find /etc -size +20k -a -size -50k  &nbsp;  #查找/etc/目录下，大于20kb并且小于50kb的文件<blockquote>
+<p>-a  &nbsp;  and    逻辑与，两个条件都满足<br>-o  &nbsp;  or    逻辑或，两个条件满足一个即可</p>
+</blockquote>
+</li>
+<li>find /etc -size +20k -a -size -50k -exec ls -lh {} \;<br>查找/etc/目录下，大于20kb并且小于50kb的文件,并显示详细信息<br>-exec 与 {} \;是配对使用的，固定格式,对操作结果执行操作</li>
+</ul>
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>搜索字符串命令：grep<br>grep [选项] 字符串 文件名  &nbsp;  #在文件当中匹配符合条件的字符串<br>选项：</p>
+<ul>
+<li>-i 忽略大小写</li>
+<li>-v 排除指定字符串</li>
+</ul>
+<h2 id="man"><a href="#man" class="headerlink" title="man"></a>man</h2><p>帮助命令</p>
+<ul>
+<li>man [选项] [参数]  &nbsp;  #获取指定命令的帮助</li>
+<li>例：man ls  &nbsp;  #查看ls的帮助</li>
+<li>[命令] -  -help  &nbsp;  #获取命令选项的帮助 例：ls - -help</li>
+</ul>
+<h2 id="压缩与解压缩命令"><a href="#压缩与解压缩命令" class="headerlink" title="压缩与解压缩命令"></a>压缩与解压缩命令</h2><p>Linux常用压缩格式：.zip  &nbsp;  .gz  &nbsp;  .bz2<br>常用压缩格式：.tar.gz  &nbsp;  .tar.bz2</p>
+<h2 id="zip格式压缩与解压缩"><a href="#zip格式压缩与解压缩" class="headerlink" title=".zip格式压缩与解压缩"></a>.zip格式压缩与解压缩</h2><ul>
+<li>zip [压缩文件名.zip] [源文件名]  &nbsp;  #压缩文件</li>
+<li>zip -r [压缩文件名.zip] [源目录]  &nbsp;  #压缩目录</li>
+<li>unzip [压缩文件名]  &nbsp;  #解压缩.zip文件</li>
+</ul>
+<h2 id="gz格式压缩"><a href="#gz格式压缩" class="headerlink" title=".gz格式压缩"></a>.gz格式压缩</h2><ul>
+<li>gzip [源文件名]  &nbsp;  #压缩为.gz格式的压缩文件，源文件会消失</li>
+<li>gzip -c [源文件名] &gt; [压缩文件名.gz]  &nbsp;  #压缩为.gz格式，源文件保留</li>
+<li>gzip -r [目录名]  &nbsp;  #压缩目录下所有的子文件，但是不能压缩目录</li>
+</ul>
+<h2 id="bz2格式压缩与解压缩"><a href="#bz2格式压缩与解压缩" class="headerlink" title=".bz2格式压缩与解压缩"></a>.bz2格式压缩与解压缩</h2><ul>
+<li>bzip2 [源文件名]  &nbsp;  #压缩为.bz2格式，不保留源文件</li>
+<li>bzip2 -k [源文件名]  &nbsp;  #压缩之后保留原文件</li>
+<li>注意：bzip2命令不能压缩目录</li>
+<li>bzip2 -d [压缩文件名]  &nbsp;  #解压缩，-k保留压缩文件</li>
+<li>bunzip2 [压缩文件名]  &nbsp;  #解压缩，-k保留压缩文件</li>
+</ul>
+<h2 id="打包与解打包"><a href="#打包与解打包" class="headerlink" title="打包与解打包"></a>打包与解打包</h2><ul>
+<li>tar -cvf  [打包文件名.tar]  [源文件名]<br>选项：</li>
+<li>-c  打包</li>
+<li>-v  显示过程</li>
+<li>-f  指定打包后的文件名</li>
+<li>tar -xvf [打包文件名]  #-x   解打包</li>
+</ul>
+<h2 id="tar-gz压缩与解压缩"><a href="#tar-gz压缩与解压缩" class="headerlink" title=".tar.gz压缩与解压缩"></a>.tar.gz压缩与解压缩</h2><ul>
+<li>.tar.gz格式是先打包为.tar格式，在压缩为.gz格式</li>
+<li>tar -zcvf [(可加其他目录)压缩包名.tar.gz] [源文件] &nbsp; #-z   压缩为 .tar.gz格式</li>
+<li>tar -zxvf [压缩包名.tar.gz] &nbsp; #-x  解压缩.tar.gz格式</li>
+<li>tar -zxvf [压缩包名.tar.bz2] -C [目标目录] &nbsp; #解压文件到目标目录</li>
+</ul>
+<h2 id="tar-bz2压缩与解压缩"><a href="#tar-bz2压缩与解压缩" class="headerlink" title=".tar.bz2压缩与解压缩"></a>.tar.bz2压缩与解压缩</h2><ul>
+<li>tar -jcvf [压缩包名.tar.bz2] [源文件] &nbsp; #-z   压缩为 .tar.bz2格式</li>
+<li>tar -jxvf [压缩包名.tar.bz2] &nbsp; #-x    解压缩.tar.bz2格式</li>
+</ul>
+<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2><ul>
+<li>w  &nbsp;  #查看用户登录信息（详细）</li>
+<li>who [用户名] &nbsp; #查看用户登录信息</li>
+<li>last &nbsp; #查询当前登录和过去登录的用户信息</li>
+<li>lastlog &nbsp; #查看所有用户的最后一次登录时间</li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[梅林安装ss插件]]></title>
       <url>/2017/10/15/%E6%A2%85%E6%9E%97%E5%AE%89%E8%A3%85ss%E6%8F%92%E4%BB%B6/</url>
       <content type="html"><![CDATA[<p>前几天给K3刷了梅林固件（LEDE用起来太麻烦了），由于现在严查番羽墙梅林软件中心的ss插件被迫下架了，所以需要手动安装</p>

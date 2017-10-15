@@ -37,7 +37,7 @@
     
     <title>
         
-            Hello World | 
+            CentOS常用基础命令整理 | 
         
         Tengdw&#39;s blog
     </title>
@@ -49,7 +49,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Tengdw">
     <meta name="description" itemprop="description" content="个人博客,IT技术,Java">
-    <meta name="keywords" content="">
+    <meta name="keywords" content=",Linux">
 
     <!-- Import lsloader -->
     <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
@@ -231,18 +231,18 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://yoursite.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Hello World | Tengdw&#39;s blog">
+    <meta property="og:title" content="CentOS常用基础命令整理 | Tengdw&#39;s blog">
     <meta property="og:image" content="http://yoursite.com/img/favicon.png" />
     <meta property="og:description" content="个人博客,IT技术,Java">
-    
+    <meta property="og:article:tag" content="Linux"> 
 
     
-        <meta property="article:published_time" content="Fri Oct 13 2017 11:18:07 GMT+0000" />
-        <meta property="article:modified_time" content="Fri Oct 13 2017 19:18:07 GMT+0800" />
+        <meta property="article:published_time" content="Sun Oct 15 2017 15:05:15 GMT+0000" />
+        <meta property="article:modified_time" content="Sun Oct 15 2017 16:11:46 GMT+0800" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="Hello World | Tengdw&#39;s blog">
+    <meta name="twitter:title" content="CentOS常用基础命令整理 | Tengdw&#39;s blog">
     <meta name="twitter:description" content="个人博客,IT技术,Java">
     <meta name="twitter:image" content="http://yoursite.com/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
@@ -250,7 +250,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://yoursite.com/2017/10/13/hello-world/index.html" />
+        <link rel="canonical" href="http://yoursite.com/2017/10/15/CentOS常用基础命令整理/index.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -262,10 +262,10 @@
 {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "mainEntityOfPage": "http://yoursite.com/2017/10/13/hello-world/index.html",
-    "headline": "Hello World",
-    "datePublished": "Fri Oct 13 2017 11:18:07 GMT+0000",
-    "dateModified": "Fri Oct 13 2017 19:18:07 GMT+0800",
+    "mainEntityOfPage": "http://yoursite.com/2017/10/15/CentOS常用基础命令整理/index.html",
+    "headline": "CentOS常用基础命令整理",
+    "datePublished": "Sun Oct 15 2017 15:05:15 GMT+0000",
+    "dateModified": "Sun Oct 15 2017 16:11:46 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "Tengdw",
@@ -283,7 +283,7 @@
             "url": "/img/favicon.png"
         }
     },
-    "keywords": "",
+    "keywords": ",Linux",
     "description": "个人博客,IT技术,Java",
 }
 </script>
@@ -349,7 +349,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Quick-Start"><span class="post-toc-number">1.</span> <span class="post-toc-text">Quick Start</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Create-a-new-post"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Create a new post</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Run-server"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Run server</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Generate-static-files"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Generate static files</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Deploy-to-remote-sites"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ls"><span class="post-toc-number">1.</span> <span class="post-toc-text">ls</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#mkdir"><span class="post-toc-number">2.</span> <span class="post-toc-text">mkdir</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#cd"><span class="post-toc-number">3.</span> <span class="post-toc-text">cd</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件权限"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">文件权限</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#相对路径与绝对路径"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">相对路径与绝对路径</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#rmdir"><span class="post-toc-number">4.</span> <span class="post-toc-text">rmdir</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#rm-rf"><span class="post-toc-number">5.</span> <span class="post-toc-text">rm -rf</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#cp"><span class="post-toc-number">6.</span> <span class="post-toc-text">cp</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#mv"><span class="post-toc-number">7.</span> <span class="post-toc-text">mv</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ln"><span class="post-toc-number">8.</span> <span class="post-toc-text">ln</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#硬链接与软链接"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">硬链接与软链接</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#locate"><span class="post-toc-number">9.</span> <span class="post-toc-text">locate</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#whereis"><span class="post-toc-number">10.</span> <span class="post-toc-text">whereis</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#which"><span class="post-toc-number">11.</span> <span class="post-toc-text">which</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#find"><span class="post-toc-number">12.</span> <span class="post-toc-text">find</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#grep"><span class="post-toc-number">13.</span> <span class="post-toc-text">grep</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#man"><span class="post-toc-number">14.</span> <span class="post-toc-text">man</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#压缩与解压缩命令"><span class="post-toc-number">15.</span> <span class="post-toc-text">压缩与解压缩命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#zip格式压缩与解压缩"><span class="post-toc-number">16.</span> <span class="post-toc-text">.zip格式压缩与解压缩</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#gz格式压缩"><span class="post-toc-number">17.</span> <span class="post-toc-text">.gz格式压缩</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bz2格式压缩与解压缩"><span class="post-toc-number">18.</span> <span class="post-toc-text">.bz2格式压缩与解压缩</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打包与解打包"><span class="post-toc-number">19.</span> <span class="post-toc-text">打包与解打包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#tar-gz压缩与解压缩"><span class="post-toc-number">20.</span> <span class="post-toc-text">.tar.gz压缩与解压缩</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#tar-bz2压缩与解压缩"><span class="post-toc-number">21.</span> <span class="post-toc-text">.tar.bz2压缩与解压缩</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他命令"><span class="post-toc-number">22.</span> <span class="post-toc-text">其他命令</span></a></li></ol>
     </ul>
     
 
@@ -381,7 +381,7 @@
         
     
             <p class="article-headline-p">
-                Hello World
+                CentOS常用基础命令整理
             </p>
         </div>
 
@@ -400,7 +400,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Tengdw</strong>
-        <span>10月 13, 2017</span>
+        <span>10月 15, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -418,6 +418,15 @@
 
     <!-- Tags (bookmark) -->
     
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Linux/">Linux</a>
+    </ul>
+    
 
     <!-- Share -->
     
@@ -432,7 +441,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Hello World&url=http://yoursite.com/2017/10/13/hello-world/index.html&pic=http://yoursite.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=CentOS常用基础命令整理&url=http://yoursite.com/2017/10/15/CentOS常用基础命令整理/index.html&pic=http://yoursite.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -441,7 +450,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Hello World&url=http://yoursite.com/2017/10/13/hello-world/index.html&via=Tengdw" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=CentOS常用基础命令整理&url=http://yoursite.com/2017/10/15/CentOS常用基础命令整理/index.html&via=Tengdw" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -450,7 +459,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/10/13/hello-world/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/10/15/CentOS常用基础命令整理/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -459,7 +468,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com/2017/10/13/hello-world/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com/2017/10/15/CentOS常用基础命令整理/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -484,15 +493,195 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>CentOS（Community Enterprise Operating System，中文意思是：社区企业操作系统）是Linux发行版之一，它是来自于Red Hat Enterprise Linux依照开放源代码规定释出的源代码所编译而成。由于出自同样的源代码，因此有些要求高度稳定性的服务器以CentOS替代商业版的Red Hat Enterprise Linux使用。两者的不同，在于CentOS并不包含封闭源代码软件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Linux命令格式：命令 [选项] [参数]</div></pre></td></tr></table></figure></p>
+<h2 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h2><p>查询目录中的内容：ls [选项] [文件或目录]<br>选项：</p>
+<ul>
+<li>-a 显示所有文件，包括隐藏文件</li>
+<li>-t 显示所有文件，并以更改时间排序</li>
+<li>-l    显示详细信息(ls -l = ll)</li>
+<li>-h    人性化显示文件大小</li>
+<li>-i    显示inode</li>
+<li>-s   显示所有文件，并且以区块为单位的形式表示文件和目录大小</li>
+<li>-R   显示所有文件，并将所有子目录的文件都列出来</li>
+</ul>
+<h2 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h2><p>建立目录：mkdir -p [目录名] </p>
+<ul>
+<li>-p 递归创建(例：mkdir -p abc/def)</li>
+<li>命令英文原意：make directories</li>
+</ul>
+<h2 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h2><p>切换所在目录：cd  [目录]</p>
+<ul>
+<li>命令英文原意：change directory</li>
+<li>cd ~    进入当前用户的home目录</li>
+<li>cd –    进入上次目录</li>
+<li>cd ..    进入上一级目录</li>
+<li>cd .    进入当前目录</li>
+</ul>
+<h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><ul>
+<li>Linux靠权限来识别文件类型</li>
+<li>–rw-r-r–</li>
+<li>–文件类型（-文件 &nbsp; d 目录 &nbsp; i 软链接文件）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">rw-</th>
+<th style="text-align:left">r–</th>
+<th style="text-align:left">r-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">u所有者</td>
+<td style="text-align:left">g所属组</td>
+<td style="text-align:left">o其他人</td>
+</tr>
+<tr>
+<td style="text-align:left">r读</td>
+<td style="text-align:left">w写</td>
+<td style="text-align:left">x执行</td>
+</tr>
+</tbody>
+</table>
+<h3 id="相对路径与绝对路径"><a href="#相对路径与绝对路径" class="headerlink" title="相对路径与绝对路径"></a>相对路径与绝对路径</h3><ul>
+<li>相对路径：参照当前所在目录，进行查找 <blockquote>
+<p>如：[root@valleyecho ~]# cd ../var/www/html/</p>
+</blockquote>
+</li>
+<li>绝对路径：从根目录开始指定，一级一级递归查找。在任何目录下都能进入指定位置 <blockquote>
+<p>如：[root@valleyecho ~]# cd /var/</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a>rmdir</h2><p>删除空目录：rmdir [目录名]<br>命令英文原意：remove empty directories<br><em>只能删除空目录</em></p>
+<h2 id="rm-rf"><a href="#rm-rf" class="headerlink" title="rm -rf"></a>rm -rf</h2><p>删除文件或目录：rm -rf [文件或目录]<br>命令英文原意：remove<br>选项：</p>
+<ul>
+<li>-r 删除目录</li>
+<li>-f 强制（force）</li>
+</ul>
+<h2 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h2><p>复制命令：cp [选项] [原文件或目录] [目标目录]<br>命令英文原意：copy<br>选项：</p>
+<ul>
+<li>-r 复制目录</li>
+<li>-p 连带文件属性复制</li>
+<li>-d 若源文件是链接文件，则复制链接属性</li>
+<li>-a 相当于 -pdr</li>
+</ul>
+<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><p>剪切命令：mv  [原文件或目录] [目标目录]<br>命令英文原意：move<br><strong>mv  [原文件名或目录名] [新的文件名或目录名]  #实现重命名操作</strong></p>
+<h2 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h2><p>链接命令：ln  [原文件] [目标文件]<br>命令英文原意：link<br>功能描述：生成链接文件<br>选项：</p>
+<ul>
+<li>-s 创建软链接</li>
+</ul>
+<h3 id="硬链接与软链接"><a href="#硬链接与软链接" class="headerlink" title="硬链接与软链接"></a>硬链接与软链接</h3><ul>
+<li>硬链接特征：<ol>
+<li>拥有相同的i节点和存储block块，可以看做是同一个文件</li>
+<li>可通过i节点识别</li>
+<li>不能跨分区</li>
+<li>不能针对目录使用</li>
+</ol>
+</li>
+<li>软链接特征：<ol>
+<li>类似Windows快捷方式</li>
+<li>软链接拥有自己的i节点和block块，但是 数据块中只保存源文件的文件名和i节点号，并没有实际的文件数据</li>
+<li>lrwxrwxrwx &nbsp; l 软链接 软链接文件权限都为rwxrwxrwx</li>
+<li>修改任意文件，另一个都改变</li>
+<li>删除原文件，软链接不能使用</li>
+</ol>
+</li>
+</ul>
+<h2 id="locate"><a href="#locate" class="headerlink" title="locate"></a>locate</h2><p>文件搜索命令：locate  [文件名]<br>在后台数据库中按文件名搜索，搜索速度更快</p>
+<ul>
+<li>/var/lib/mlocate   &nbsp;   #locate命令所搜索的后台数据库</li>
+<li>updatedb  &nbsp; #更新数据库</li>
+</ul>
+<h2 id="whereis"><a href="#whereis" class="headerlink" title="whereis"></a>whereis</h2><p>搜索命令的命令：whereis</p>
+<ul>
+<li>whereis 命令名  &nbsp;  #搜索命令所在路径及帮助文档所在位置</li>
+<li>-b    只查找可执行文件</li>
+<li>-m    只查找帮助文件</li>
+</ul>
+<h2 id="which"><a href="#which" class="headerlink" title="which"></a>which</h2><p>搜索命令的命令：which</p>
+<ul>
+<li>which    命令名  &nbsp;  #搜索命令所在路径及别名</li>
+</ul>
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>搜索命令：find</p>
+<ul>
+<li>find [搜索范围] [搜索条件]    #搜索文件</li>
+<li>find / -name install.log<br><em>避免大范围搜索，会非常耗费系统资源</em><br><em>find是在系统当中搜索符合条件的文件名。如果需要匹配使用通配符，通配符是完全匹配的</em><br>Linux中的通配符：<ol>
+<li>* 匹配任意内容</li>
+<li>? 匹配任意一个字符</li>
+<li>[] 匹配任意一个中括号内的字符</li>
+</ol>
+</li>
+<li>find /toot -iname install.log  &nbsp;  #不区分大小写</li>
+<li>find /root -user root  &nbsp;  #按照所有者搜索</li>
+<li>find /root -nouser  &nbsp;  #查找没有所有者的文件</li>
+<li>find /var/log/ -mtime +10  &nbsp;  #查找10天前修改的文件<blockquote>
+<p>-10    10天内修改的文件<br>10    10天当天内修改的文件<br>+10    10前内修改的文件<br>atime    文件访问时间<br>ctime    改变文件属性<br>mtime    修改文件内容</p>
+</blockquote>
+</li>
+<li>find . -size 25k    #查找文件大小是25kb的文件（小k，大M）<blockquote>
+<p>-25  &nbsp;  小于25kb的文件<br>25   &nbsp;  等于25kb的文件<br>+25  &nbsp; 大于25kb的文件</p>
+</blockquote>
+</li>
+<li>find . -inum 262422  &nbsp;  #查找i节点是262422的文件</li>
+<li>find /etc -size +20k -a -size -50k  &nbsp;  #查找/etc/目录下，大于20kb并且小于50kb的文件<blockquote>
+<p>-a  &nbsp;  and    逻辑与，两个条件都满足<br>-o  &nbsp;  or    逻辑或，两个条件满足一个即可</p>
+</blockquote>
+</li>
+<li>find /etc -size +20k -a -size -50k -exec ls -lh {} \;<br>查找/etc/目录下，大于20kb并且小于50kb的文件,并显示详细信息<br>-exec 与 {} \;是配对使用的，固定格式,对操作结果执行操作</li>
+</ul>
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>搜索字符串命令：grep<br>grep [选项] 字符串 文件名  &nbsp;  #在文件当中匹配符合条件的字符串<br>选项：</p>
+<ul>
+<li>-i 忽略大小写</li>
+<li>-v 排除指定字符串</li>
+</ul>
+<h2 id="man"><a href="#man" class="headerlink" title="man"></a>man</h2><p>帮助命令</p>
+<ul>
+<li>man [选项] [参数]  &nbsp;  #获取指定命令的帮助</li>
+<li>例：man ls  &nbsp;  #查看ls的帮助</li>
+<li>[命令] -  -help  &nbsp;  #获取命令选项的帮助 例：ls - -help</li>
+</ul>
+<h2 id="压缩与解压缩命令"><a href="#压缩与解压缩命令" class="headerlink" title="压缩与解压缩命令"></a>压缩与解压缩命令</h2><p>Linux常用压缩格式：.zip  &nbsp;  .gz  &nbsp;  .bz2<br>常用压缩格式：.tar.gz  &nbsp;  .tar.bz2</p>
+<h2 id="zip格式压缩与解压缩"><a href="#zip格式压缩与解压缩" class="headerlink" title=".zip格式压缩与解压缩"></a>.zip格式压缩与解压缩</h2><ul>
+<li>zip [压缩文件名.zip] [源文件名]  &nbsp;  #压缩文件</li>
+<li>zip -r [压缩文件名.zip] [源目录]  &nbsp;  #压缩目录</li>
+<li>unzip [压缩文件名]  &nbsp;  #解压缩.zip文件</li>
+</ul>
+<h2 id="gz格式压缩"><a href="#gz格式压缩" class="headerlink" title=".gz格式压缩"></a>.gz格式压缩</h2><ul>
+<li>gzip [源文件名]  &nbsp;  #压缩为.gz格式的压缩文件，源文件会消失</li>
+<li>gzip -c [源文件名] &gt; [压缩文件名.gz]  &nbsp;  #压缩为.gz格式，源文件保留</li>
+<li>gzip -r [目录名]  &nbsp;  #压缩目录下所有的子文件，但是不能压缩目录</li>
+</ul>
+<h2 id="bz2格式压缩与解压缩"><a href="#bz2格式压缩与解压缩" class="headerlink" title=".bz2格式压缩与解压缩"></a>.bz2格式压缩与解压缩</h2><ul>
+<li>bzip2 [源文件名]  &nbsp;  #压缩为.bz2格式，不保留源文件</li>
+<li>bzip2 -k [源文件名]  &nbsp;  #压缩之后保留原文件</li>
+<li>注意：bzip2命令不能压缩目录</li>
+<li>bzip2 -d [压缩文件名]  &nbsp;  #解压缩，-k保留压缩文件</li>
+<li>bunzip2 [压缩文件名]  &nbsp;  #解压缩，-k保留压缩文件</li>
+</ul>
+<h2 id="打包与解打包"><a href="#打包与解打包" class="headerlink" title="打包与解打包"></a>打包与解打包</h2><ul>
+<li>tar -cvf  [打包文件名.tar]  [源文件名]<br>选项：</li>
+<li>-c  打包</li>
+<li>-v  显示过程</li>
+<li>-f  指定打包后的文件名</li>
+<li>tar -xvf [打包文件名]  #-x   解打包</li>
+</ul>
+<h2 id="tar-gz压缩与解压缩"><a href="#tar-gz压缩与解压缩" class="headerlink" title=".tar.gz压缩与解压缩"></a>.tar.gz压缩与解压缩</h2><ul>
+<li>.tar.gz格式是先打包为.tar格式，在压缩为.gz格式</li>
+<li>tar -zcvf [(可加其他目录)压缩包名.tar.gz] [源文件] &nbsp; #-z   压缩为 .tar.gz格式</li>
+<li>tar -zxvf [压缩包名.tar.gz] &nbsp; #-x  解压缩.tar.gz格式</li>
+<li>tar -zxvf [压缩包名.tar.bz2] -C [目标目录] &nbsp; #解压文件到目标目录</li>
+</ul>
+<h2 id="tar-bz2压缩与解压缩"><a href="#tar-bz2压缩与解压缩" class="headerlink" title=".tar.bz2压缩与解压缩"></a>.tar.bz2压缩与解压缩</h2><ul>
+<li>tar -jcvf [压缩包名.tar.bz2] [源文件] &nbsp; #-z   压缩为 .tar.bz2格式</li>
+<li>tar -jxvf [压缩包名.tar.bz2] &nbsp; #-x    解压缩.tar.bz2格式</li>
+</ul>
+<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2><ul>
+<li>w  &nbsp;  #查看用户登录信息（详细）</li>
+<li>who [用户名] &nbsp; #查看用户登录信息</li>
+<li>last &nbsp; #查询当前登录和过去登录的用户信息</li>
+<li>lastlog &nbsp; #查看所有用户的最后一次登录时间</li>
+</ul>
 
         
     
@@ -513,19 +702,19 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/10/14/Java-OOP/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
+    
+        <a href="/2017/10/15/梅林安装ss插件/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
     
 </nav>
 

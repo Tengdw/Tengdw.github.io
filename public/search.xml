@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[Jetbrains 全家桶授权服务器搭建]]></title>
+      <url>/2017/11/03/Jetbrains-%E5%85%A8%E5%AE%B6%E6%A1%B6%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/</url>
+      <content type="html"><![CDATA[<p>授权服务器地址：<strong><a href="http://idea.valleyecho.cn" target="_blank" rel="external">http://idea.valleyecho.cn</a></strong><br>用法：软件内–&gt;Help–&gt;Register…–&gt;License server–&gt;License server address 填入上面的地址就行了<br>IntelliJ IDEA、PHPStrom、PyCharm、WebStrom等IDE都是由Jetbrains公司开发的。<br>搭建环境：CentOS 7.3<br>软件下载地址：<a href="https://valleyecho-1252960615.cosgz.myqcloud.com/IntelliJIDEALicenseServer%280.0.0.0_1017%29.zip" target="_blank" rel="external">点我下载</a> 软件作者是 <a href="https://blog.lanyus.com" target="_blank" rel="external">Lanyu</a>，更多的用法请去他的博客看<br>压缩包解压有多个环境运行版本的一般用后缀 _amd64 的就行了，上传到服务器上。我这里放在<code>/root</code>目录的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">cd /root</div><div class="line">mv IntelliJIDEALicenseServer_linux_amd64 IdeaServer #名字太长了改下名</div><div class="line">chmod +x ./IdeaServer #授予执行权限</div><div class="line">./IdeaServer #运行</div><div class="line">#运行成功后显示以下信息</div><div class="line">[root@VM_129_4_centos ~]# ./IdeaServer </div><div class="line">2017/11/02 22:46:06 *************************************************************</div><div class="line">2017/11/02 22:46:06 ** IntelliJ IDEA License Server                            **</div><div class="line">2017/11/02 22:46:06 ** by: ilanyu                                              **</div><div class="line">2017/11/02 22:46:06 ** http://www.lanyus.com/                                  **</div><div class="line">2017/11/02 22:46:06 ** Alipay donation: lanyu19950316@gmail.com                **</div><div class="line">2017/11/02 22:46:06 ** Please support genuine!!!                               **</div><div class="line">2017/11/02 22:46:06 ** listen on 0.0.0.0:1017...                               **</div><div class="line">2017/11/02 22:46:06 ** You can use http://127.0.0.1:1017 as license server     **</div><div class="line">2017/11/02 22:46:06 *************************************************************</div><div class="line">2017/11/02 22:46:06 listen tcp :1017: bind: address already in use</div></pre></td></tr></table></figure></p>
+<p>上面的<code>http://127.0.0.1:1017</code>就是 License server address<br><code>Ctrl+c</code>退出程序，我们想作为授权服务器就必须要该软件一直运行在后台，这里需要<code>screen</code>命令,可以用<code>screen -v</code>检测版本的方式来确认有无该命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">screen -dmS IdeaServer ./IdeaServer #让IdeaServer在后台运行，可以用`top`来查看程序有没有在后台运行</div></pre></td></tr></table></figure></p>
+<p>最后添加开机启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vim /etc/rc.local</div><div class="line">#在文件末尾添加</div><div class="line">cd /root/</div><div class="line">screen -dmS IdeaServer ./IdeaServer</div></pre></td></tr></table></figure></p>
+<p>现在还只能在服务器本地使用，通过Nginx反向代理<code>http://127.0.0.1:1017</code>我们就能在远程实现激活啦。由于我用的是面板，配置反向代理是傻瓜式的这里就不说了，贴上 idea.valleyecho.cn 的Nginx配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">server</div><div class="line">&#123;</div><div class="line">    listen 80;</div><div class="line">    server_name console.valleyecho.cn;</div><div class="line">    index index.php index.html index.htm default.php default.htm default.html;</div><div class="line">    root /www/wwwroot/console;</div><div class="line">    </div><div class="line">    #SSL-START SSL相关配置，请勿删除或修改下一行带注释的404规则</div><div class="line">    #error_page 404/404.html;</div><div class="line">    #SSL-END</div><div class="line">    </div><div class="line">    #ERROR-PAGE-START  错误页配置，可以注释、删除或修改</div><div class="line">    error_page 404 /404.html;</div><div class="line">    error_page 502 /502.html;</div><div class="line">    #ERROR-PAGE-END</div><div class="line">    </div><div class="line">    #PHP-INFO-START  PHP引用配置，可以注释或修改</div><div class="line"></div><div class="line">	#PROXY-START</div><div class="line">    location ~ /purge(/.*) &#123; </div><div class="line">        proxy_cache_purge cache_one $host$request_uri$is_args$args;</div><div class="line">        #access_log  /www/wwwlogs/console.valleyecho.cn_purge_cache.log;</div><div class="line">    &#125;</div><div class="line">    location / </div><div class="line">    &#123;</div><div class="line">        proxy_pass http://localhost:20170;</div><div class="line">        proxy_set_header Host $host;</div><div class="line">        proxy_set_header X-Forwarded-For $remote_addr;</div><div class="line">        #proxy_cache cache_one;</div><div class="line">        #proxy_cache_key $host$request_uri$is_args$args;</div><div class="line">        #proxy_cache_valid 200 304 301 302 1h;</div><div class="line">        add_header X-Cache $upstream_cache_status;</div><div class="line">        </div><div class="line">        expires 12h;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    location ~ .*\.(php|jsp|cgi|asp|aspx|flv|swf|xml)?$</div><div class="line">    &#123; </div><div class="line">        proxy_set_header Host $host;</div><div class="line">        proxy_set_header X-Forwarded-For $remote_addr;</div><div class="line">        proxy_pass http://localhost:20170;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    #PROXY-END</div><div class="line"></div><div class="line">	include enable-php-54.conf;</div><div class="line">    #PHP-INFO-END</div><div class="line">    </div><div class="line">    #REWRITE-START URL重写规则引用,修改后将导致面板设置的伪静态规则失效</div><div class="line">    include /www/server/panel/vhost/rewrite/console.valleyecho.cn.conf;</div><div class="line">    #REWRITE-END</div><div class="line">    </div><div class="line">    #禁止访问的文件或目录</div><div class="line">    access_log  /www/wwwlogs/console.valleyecho.cn.log;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 服务器 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> IDEA Linux </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Ubuntu配置Java环境]]></title>
+      <url>/2017/11/03/Ubuntu%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83/</url>
+      <content type="html"><![CDATA[<p>环境：Ubuntu 16.04 TLS<br>先检查有无Java环境<code>java -version</code> ,如果以前没装过会输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">tengdw@tengdw-Ubuntu:~$ java -version</div><div class="line">程序 &apos;java&apos; 已包含在下列软件包中：</div><div class="line"> * default-jre</div><div class="line"> * gcj-5-jre-headless</div><div class="line"> * openjdk-8-jre-headless</div><div class="line"> * gcj-4.8-jre-headless</div><div class="line"> * gcj-4.9-jre-headless</div><div class="line"> * openjdk-9-jre-headless</div><div class="line">请尝试：sudo apt install &lt;选定的软件包&gt;</div></pre></td></tr></table></figure></p>
+<p>去<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">Oracle官网下载JDK</a>,选linux-64.tar.gz格式的<br>解压后会得到一个前缀为jdk的目录，复制目录到<code>/usr</code>下（也可以放在其他目录）<br>编辑<code>/etc/profile</code>文件，导入Java环境变量，使用Ubuntu自带的gedit编辑器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">tengdw@tengdw-Ubuntu:~$ sudo gedit /etc/profile</div><div class="line">#profile内容如下:</div><div class="line"># /etc/profile: system-wide .profile file for the Bourne shell (sh(1))</div><div class="line"># and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).</div><div class="line"></div><div class="line">if [ &quot;$PS1&quot; ]; then</div><div class="line">  if [ &quot;$BASH&quot; ] &amp;&amp; [ &quot;$BASH&quot; != &quot;/bin/sh&quot; ]; then</div><div class="line">    # The file bash.bashrc already sets the default PS1.</div><div class="line">    # PS1=&apos;\h:\w\$ &apos;</div><div class="line">    if [ -f /etc/bash.bashrc ]; then</div><div class="line">      . /etc/bash.bashrc</div><div class="line">    fi</div><div class="line">  else</div><div class="line">    if [ &quot;`id -u`&quot; -eq 0 ]; then</div><div class="line">      PS1=&apos;# &apos;</div><div class="line">    else</div><div class="line">      PS1=&apos;$ &apos;</div><div class="line">    fi</div><div class="line">  fi</div><div class="line">fi</div><div class="line"></div><div class="line">if [ -d /etc/profile.d ]; then</div><div class="line">  for i in /etc/profile.d/*.sh; do</div><div class="line">    if [ -r $i ]; then</div><div class="line">      . $i</div><div class="line">    fi</div><div class="line">  done</div><div class="line">  unset i</div><div class="line">fi</div><div class="line">#在最后加上</div><div class="line">export JAVA_HOME=/usr/jdk1.8.0_151 #/usr/jdk1.8.0_151为jdk的主目录</div><div class="line">export JRE_HOME=$JAVA_HOME/jre</div><div class="line">export CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JRE_HOME/lib</div><div class="line">export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin</div></pre></td></tr></table></figure></p>
+<p><strong>使用<code>source /etc/profile</code>是更改的profile文件生效</strong><br>再次使用<code>java -version</code>验证<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">tengdw@tengdw-Ubuntu:~$ source /etc/profile</div><div class="line">tengdw@tengdw-Ubuntu:~$ java -version</div><div class="line">java version &quot;1.8.0_151&quot;</div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_151-b12)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.151-b12, mixed mode)</div></pre></td></tr></table></figure></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Ubuntu </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Linux Ubuntu Java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Ubuntu依赖关系问题]]></title>
+      <url>/2017/11/03/Ubuntu%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<p>系统版本：16.04 LTS<br>使用<code>dpkg -i filename.deb</code>安装软件出现依赖关系问题<br>```<br>sudo apt-get update #更新本地源列表<br>sudo apt-get install #执行后终端会提示前面安装的filename.deb缺少的库<br>sudo apt-get -f install #执行后就能通过搜索找到安装的软件啦</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Ubuntu </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Ubuntu,Linux </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[MySql数据库忘记密码怎么办？]]></title>
+      <url>/2017/11/03/MySql%E6%95%B0%E5%89%A7%E5%BA%93%E5%BF%98%E8%AE%B0%E5%AF%86%E7%A0%81%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F/</url>
+      <content type="html"><![CDATA[<p>环境：CentOS 7，MariaDB 5.5<br>第一步：<br><code>vim /etc/my.cnf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">[mysqld]</div><div class="line">skip-grant-tables #添加这句跳过密码验证</div><div class="line">datadir=/var/lib/mysql</div><div class="line">socket=/var/lib/mysql/mysql.sock</div><div class="line"># Disabling symbolic-links is recommended to prevent assorted security risks</div><div class="line">symbolic-links=0</div><div class="line"># Settings user and group are ignored when systemd is used.</div><div class="line"># If you need to run mysqld under a different user or group,</div><div class="line"># customize your systemd unit file for mariadb according to the</div><div class="line"># instructions in http://fedoraproject.org/wiki/Systemd</div><div class="line"></div><div class="line">[mysqld_safe]</div><div class="line">log-error=/var/log/mariadb/mariadb.log</div><div class="line">pid-file=/var/run/mariadb/mariadb.pid</div><div class="line"></div><div class="line">#</div><div class="line"># include all files from the config directory</div><div class="line">#</div><div class="line">!includedir /etc/my.cnf.d</div></pre></td></tr></table></figure></p>
+<p>第二步：<br>重启<code>systemctl restart mariadb</code><br>无密码登录<code>mysql -u root -p</code>提示要输入密码直接回车就行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">[root@VM_129_4_centos ~]# mysql -u root -p #无密码登录</div><div class="line">Enter password: #直接回车</div><div class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</div><div class="line">Your MariaDB connection id is 3</div><div class="line">Server version: 5.5.50-MariaDB MariaDB Server</div><div class="line"></div><div class="line">Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.</div><div class="line"></div><div class="line">Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.</div><div class="line"></div><div class="line">MariaDB [(none)]&gt; use mysql; #注意每句SQL都要带 ; 号</div><div class="line">Reading table information for completion of table and column names</div><div class="line">You can turn off this feature to get a quicker startup with -A</div><div class="line"></div><div class="line">Database changed</div><div class="line">MariaDB [mysql]&gt; update user set authentication_string=password(&apos;123456&apos;) where user=&apos;root&apos;; #更改root密码为123456</div><div class="line">Query OK, 4 rows affected (0.00 sec)</div><div class="line">Rows matched: 4  Changed: 4  Warnings: 0</div><div class="line"></div><div class="line">MariaDB [mysql]&gt; flush privileges; #执行</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">MariaDB [mysql]&gt; exit; #退出</div><div class="line">Bye</div></pre></td></tr></table></figure></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 服务器 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Linux 数据库 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Ubuntu下配置Git]]></title>
+      <url>/2017/10/30/Ubuntu%E4%B8%8B%E9%85%8D%E7%BD%AEGit/</url>
+      <content type="html"><![CDATA[<p>系统环境:Ubuntu 16.04 TLS</p>
+<h3 id="Git安装"><a href="#Git安装" class="headerlink" title="Git安装"></a>Git安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">tengdw@ubuntu-16-04-lts:sudo apt-get install git</div><div class="line">tengdw@ubuntu-16-04-lts:~/tengdwBlog$ git #安装完成后终端输入`git`确认安装没有问题</div><div class="line">usage: git [--version] [--help] [-C &lt;path&gt;] [-c name=value]</div><div class="line">           [--exec-path[=&lt;path&gt;]] [--html-path] [--man-path] [--info-path]</div><div class="line">           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]</div><div class="line">           [--git-dir=&lt;path&gt;] [--work-tree=&lt;path&gt;] [--namespace=&lt;name&gt;]</div><div class="line">           &lt;command&gt; [&lt;args&gt;]</div><div class="line"></div><div class="line">这些是各种场合常见的 Git 命令：</div><div class="line"></div><div class="line">开始一个工作区（参见：git help tutorial）</div><div class="line">   clone      克隆一个仓库到一个新目录</div><div class="line">   init       创建一个空的 Git 仓库或重新初始化一个已存在的仓库</div><div class="line"></div><div class="line">在当前变更上工作（参见：git help everyday）</div><div class="line">   add        添加文件内容至索引</div><div class="line">   mv         移动或重命名一个文件、目录或符号链接</div><div class="line">   reset      重置当前 HEAD 到指定状态</div><div class="line">   rm         从工作区和索引中删除文件</div><div class="line"></div><div class="line">检查历史和状态（参见：git help revisions）</div><div class="line">   bisect     通过二分查找定位引入 bug 的提交</div><div class="line">   grep       输出和模式匹配的行</div><div class="line">   log        显示提交日志</div><div class="line">   show       显示各种类型的对象</div><div class="line">   status     显示工作区状态</div><div class="line"></div><div class="line">扩展、标记和调校您的历史记录</div><div class="line">   branch     列出、创建或删除分支</div><div class="line">   checkout   切换分支或恢复工作区文件</div><div class="line">   commit     记录变更到仓库</div><div class="line">   diff       显示提交之间、提交和工作区之间等的差异</div><div class="line">   merge      合并两个或更多开发历史</div><div class="line">   rebase     在另一个分支上重新应用提交</div><div class="line">   tag        创建、列出、删除或校验一个 GPG 签名的标签对象</div><div class="line"></div><div class="line">协同（参见：git help workflows）</div><div class="line">   fetch      从另外一个仓库下载对象和引用</div><div class="line">   pull       获取并整合另外的仓库或一个本地分支</div><div class="line">   push       更新远程引用和相关的对象</div><div class="line"></div><div class="line">命令 &apos;git help -a&apos; 和 &apos;git help -g&apos; 显示可用的子命令和一些概念帮助。</div><div class="line">查看 &apos;git help &lt;命令&gt;&apos; 或 &apos;git help &lt;概念&gt;&apos; 以获取给定子命令或概念的</div><div class="line">帮助。</div></pre></td></tr></table></figure>
+<h3 id="Git配置"><a href="#Git配置" class="headerlink" title="Git配置"></a>Git配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">tengdw@ubuntu-16-04-lts:~$ git config --global user.name &quot;Tengdw&quot; #&quot;&quot;内为github用户名</div><div class="line">tengdw@ubuntu-16-04-lts:~$ git config --global user.email &quot;t_dw@qq.com&quot; #&quot;&quot;内为github主邮箱</div><div class="line">tengdw@ubuntu-16-04-lts:~$ ssh-keygen -C &apos;t_dw@qq.com&apos; -t rsa</div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter file in which to save the key (/home/tengdw/.ssh/id_rsa): #选择key的存储位置，可以直接回车</div><div class="line">Created directory &apos;/home/tengdw/.ssh&apos;.</div><div class="line">Enter passphrase (empty for no passphrase): #可以直接回车，也可以填写github登录密码实现免密连接</div><div class="line">Enter same passphrase again: #确认密码</div><div class="line">Your identification has been saved in /home/tengdw/.ssh/id_rsa.</div><div class="line">Your public key has been saved in /home/tengdw/.ssh/id_rsa.pub.</div><div class="line">The key fingerprint is:</div><div class="line">SHA256:KSiRwQufdV4I26eN90AlE+QJX1IKTXdXJEDIjyMGglU t_dw@qq.com</div><div class="line">The key&apos;s randomart image is:</div><div class="line">+---[RSA 2048]----+</div><div class="line">| ..oooE=B+=o+.ooo|</div><div class="line">|. oooo+=oXo. . . |</div><div class="line">| oo+.+.oB  o     |</div><div class="line">|  +. ..*o.o .    |</div><div class="line">|  . . +.S. .     |</div><div class="line">|   .   o o       |</div><div class="line">|          .      |</div><div class="line">|                 |</div><div class="line">|                 |</div><div class="line">+----[SHA256]-----+</div></pre></td></tr></table></figure>
+<p>打开<code>~/.ssh/id_rsa.pub</code>文件,复制其中的所有内容，登录github–&gt;setting–&gt;SSH and GPG keys–&gt;New SSH key<br>Title随便Key粘贴刚才复制的内容</p>
+<h3 id="Git测试"><a href="#Git测试" class="headerlink" title="Git测试"></a>Git测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tengdw@ubuntu-16-04-lts:~$ ssh -T git@github.com #测试能不能连接成功 如果之前输了密码系统会弹窗验证密码</div><div class="line">Hi Tengdw! You&apos;ve successfully authenticated, but GitHub does not provide shell access.</div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> Ubuntu </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Ubuntu,Git </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Java五子棋]]></title>
+      <url>/2017/10/28/Java%E4%BA%94%E5%AD%90%E6%A3%8B/</url>
+      <content type="html"><![CDATA[<p>实现了准确下子、黑白交替下子、移动窗口棋子不会丢失、五连子判定、重新开始、悔棋</p>
+<h2 id="Chess-java"><a href="#Chess-java" class="headerlink" title="Chess.java"></a>Chess.java</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">package com.review;</div><div class="line"></div><div class="line">public class Chess &#123;</div><div class="line">	public int x,y;</div><div class="line">	public boolean isBlack;//表示是黑还是白</div><div class="line">	public static int chessWidth=30;//棋子大小</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public int hashCode() &#123;</div><div class="line">		return 1;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public boolean equals(Object obj) &#123;</div><div class="line">		if(this==obj)&#123;</div><div class="line">			return true;</div><div class="line">		&#125;</div><div class="line">		if(obj instanceof Chess)&#123;</div><div class="line">			Chess c=(Chess) obj;</div><div class="line">			if(c.x==this.x &amp;&amp; c.y==this.y)&#123;</div><div class="line">				return true;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="GameFrame-java"><a href="#GameFrame-java" class="headerlink" title="GameFrame.java"></a>GameFrame.java</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">package com.hp.review;</div><div class="line"></div><div class="line"></div><div class="line">import java.awt.event.ActionEvent;</div><div class="line">import java.awt.event.ActionListener;</div><div class="line">import java.awt.event.MouseEvent;</div><div class="line">import java.awt.event.MouseListener;</div><div class="line"></div><div class="line">import javax.swing.JMenu;</div><div class="line">import javax.swing.JMenuBar;</div><div class="line">import javax.swing.JMenuItem;</div><div class="line">import javax.swing.JPanel;</div><div class="line"></div><div class="line">import com.hp.test.Test;</div><div class="line"></div><div class="line">public class GameFrame extends MainFrame &#123;</div><div class="line">	private GamePanel gp;</div><div class="line">	public GameFrame()&#123;</div><div class="line">		//创建面板对象</div><div class="line">		gp=new GamePanel();</div><div class="line">		add(gp);</div><div class="line">		//JPanel jp = (JPanel) getContentPane();</div><div class="line">		//添加菜单栏</div><div class="line">		JMenuBar jmb = new JMenuBar();</div><div class="line">		setJMenuBar(jmb);</div><div class="line">		JMenu jm = new JMenu(&quot;选项&quot;);</div><div class="line">		jmb.add(jm);</div><div class="line">		//为菜单添加子菜单</div><div class="line">		JMenuItem jmi1 = new JMenuItem(&quot;重新开始&quot;);</div><div class="line">		JMenuItem jmi2 = new JMenuItem(&quot;悔棋&quot;);</div><div class="line">		jm.add(jmi1);</div><div class="line">		jm.add(jmi2);</div><div class="line">		jmi1.addActionListener(new ActionListener() &#123;</div><div class="line">			@Override</div><div class="line">			public void actionPerformed(ActionEvent e) &#123;</div><div class="line">				gp.restartGame();</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">		jmi2.addActionListener(new ActionListener() &#123;</div><div class="line">			@Override</div><div class="line">			public void actionPerformed(ActionEvent e) &#123;</div><div class="line">				gp.backPreviousStep();</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		Test.setDebug(true);</div><div class="line">		new GameFrame();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="GamePanel-java"><a href="#GamePanel-java" class="headerlink" title="GamePanel.java"></a>GamePanel.java</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div></pre></td><td class="code"><pre><div class="line">package com.hp.review;</div><div class="line"></div><div class="line">import java.awt.Color;</div><div class="line">import java.awt.Graphics;</div><div class="line">import java.awt.Point;</div><div class="line">import java.awt.event.MouseEvent;</div><div class="line">import java.awt.event.MouseListener;</div><div class="line">import java.util.ArrayList;</div><div class="line">import java.util.Arrays;</div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">import javax.swing.JOptionPane;</div><div class="line">import javax.swing.JPanel;</div><div class="line"></div><div class="line">import com.hp.test.Test;</div><div class="line"></div><div class="line">public class GamePanel extends JPanel implements MouseListener &#123;</div><div class="line">	private int boxWidth = 48;// 每个格子的宽高</div><div class="line">	private int startX = 20, stratY = 20;// 棋盘绘制的起点坐标</div><div class="line">	private int hengNum = 10, shuNum = 10;// henNum表示多少行，shuNum表示多少列</div><div class="line">	private int hang,lie;</div><div class="line">	private boolean flag = true;// 控制绘制黑棋还是白棋的变量，为true绘制黑棋，为false绘制白棋</div><div class="line">	private boolean isWin = false; // 如果有人胜利isWin赋值为true</div><div class="line">	private List&lt;Chess&gt; chesses;</div><div class="line">	// 指定行列值为0，则认为没有落子，如果为1咯黑子，2落了白字</div><div class="line">	private int arr[][] = new int[hengNum + 1][shuNum + 1];// 存储棋盘上每一个交叉点信息的二维数组，hengNum=10,shuNum=10但是有11*11个点</div><div class="line"></div><div class="line">	// 低耦合，高内聚</div><div class="line">	public GamePanel() &#123;</div><div class="line">		chesses = new ArrayList&lt;Chess&gt;();</div><div class="line">		setBackground(Color.YELLOW);</div><div class="line">		addMouseListener(this);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void paint(Graphics g) &#123;</div><div class="line"></div><div class="line">		super.paint(g);// 绘制面板本身</div><div class="line">		// 绘制棋盘</div><div class="line">		// 画10条横线</div><div class="line">		for (int i = 0; i &lt;= hengNum; i++) &#123;</div><div class="line">			g.drawLine(startX, stratY + i * boxWidth, shuNum * boxWidth</div><div class="line">					+ startX, stratY + i * boxWidth);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		// 绘制10竖线</div><div class="line">		for (int i = 0; i &lt;= shuNum; i++) &#123;</div><div class="line">			g.drawLine(startX + i * boxWidth, stratY, startX + i * boxWidth,</div><div class="line">					hengNum * boxWidth + stratY);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		// 在paint方法中绘制棋子保证最小化以后不丢失</div><div class="line">		for (int i = 0; i &lt; chesses.size(); i++) &#123;</div><div class="line">			Chess c = chesses.get(i);</div><div class="line">			g.setColor(c.isBlack == true ? Color.black : Color.white);</div><div class="line">			g.fillOval(c.x, c.y, c.chessWidth, c.chessWidth);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	// 点击</div><div class="line">	public void mouseClicked(MouseEvent e) &#123;</div><div class="line">		// 如果有人获胜了不会执行此方法</div><div class="line">		if (isWin) &#123;</div><div class="line">			return;</div><div class="line">		&#125;</div><div class="line">		Graphics g = getGraphics();</div><div class="line">		Point p = e.getPoint();// 鼠标点击点的坐标</div><div class="line">		// 排除棋盘外的点击</div><div class="line">		if (p.x &lt; startX || p.y &lt; stratY || p.x &gt; (startX + boxWidth * shuNum)</div><div class="line">				|| p.y &gt; (stratY + boxWidth * hengNum)) &#123;</div><div class="line">			return;</div><div class="line">		&#125;</div><div class="line">		// 确定落子的行和列</div><div class="line">		hang = (int) Math.round((p.y - stratY) * 1.0 / boxWidth);</div><div class="line">		lie = (int) Math.round((p.x - startX) * 1.0 / boxWidth);</div><div class="line">		Test.print(hang + &quot;   &quot; + lie);</div><div class="line"></div><div class="line">		// 确定落子交叉点的坐标</div><div class="line">		int x = lie * boxWidth + startX - Chess.chessWidth / 2;</div><div class="line">		int y = hang * boxWidth + stratY - Chess.chessWidth / 2;</div><div class="line">		// 落子</div><div class="line">		// if(flag)&#123;</div><div class="line">		// g.setColor(new Color(0x000000));</div><div class="line">		// &#125;else&#123;</div><div class="line">		// g.setColor(new Color(0xFFFFFF));</div><div class="line">		// &#125;</div><div class="line"></div><div class="line">		// 将绘制的棋子存储到集合中</div><div class="line">		Chess c = new Chess();</div><div class="line">		c.x = x;</div><div class="line">		c.y = y;</div><div class="line">		c.isBlack = flag;</div><div class="line">		if (!chesses.contains(c)) &#123;</div><div class="line">			g.setColor(flag == true ? Color.BLACK : Color.WHITE);</div><div class="line">			g.fillOval(x, y, Chess.chessWidth, Chess.chessWidth);</div><div class="line">			arr[hang][lie] = c.isBlack == true ? 1 : 2;</div><div class="line">			chesses.add(c);</div><div class="line">			flag = !flag;// 必须放在循环内</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		// 打印输出二维数组的值</div><div class="line">		System.out.println();</div><div class="line">		for (int i = 0; i &lt; arr.length; i++) &#123;</div><div class="line">			for (int j = 0; j &lt; arr[i].length; j++) &#123;</div><div class="line">				Test.print(arr[i][j] + &quot;  &quot;);</div><div class="line">			&#125;</div><div class="line">			System.out.println();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		for (int i = 0; i &lt; arr.length; i++) &#123;</div><div class="line">			for (int j = 0; j &lt; arr[i].length; j++) &#123;</div><div class="line">				// 横向判断</div><div class="line">				if (j &lt;= arr[i].length - 5) &#123;</div><div class="line">					if (arr[i][j] == 1 &amp;&amp; arr[i][j + 1] == 1</div><div class="line">							&amp;&amp; arr[i][j + 2] == 1 &amp;&amp; arr[i][j + 3] == 1</div><div class="line">							&amp;&amp; arr[i][j + 4] == 1) &#123;</div><div class="line">						System.out.println(&quot;黑棋胜利&quot;);</div><div class="line">						this.blackWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">					if (arr[i][j] == 2 &amp;&amp; arr[i][j + 1] == 2</div><div class="line">							&amp;&amp; arr[i][j + 2] == 2 &amp;&amp; arr[i][j + 3] == 2</div><div class="line">							&amp;&amp; arr[i][j + 4] == 2) &#123;</div><div class="line">						System.out.println(&quot;白棋胜利&quot;);</div><div class="line">						this.whiteWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">				// 竖向判断</div><div class="line">				if (i &lt;= arr.length - 5) &#123;</div><div class="line">					if (arr[i][j] == 1 &amp;&amp; arr[i + 1][j] == 1</div><div class="line">							&amp;&amp; arr[i + 2][j] == 1 &amp;&amp; arr[i + 3][j] == 1</div><div class="line">							&amp;&amp; arr[i + 4][j] == 1) &#123;</div><div class="line">						System.out.println(&quot;黑棋胜利&quot;);</div><div class="line">						this.blackWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">					if (arr[i][j] == 2 &amp;&amp; arr[i + 1][j] == 2</div><div class="line">							&amp;&amp; arr[i + 2][j] == 2 &amp;&amp; arr[i + 3][j] == 2</div><div class="line">							&amp;&amp; arr[i + 4][j] == 2) &#123;</div><div class="line">						System.out.println(&quot;白棋胜利&quot;);</div><div class="line">						this.whiteWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">				// /向判断,只判断右上角6*6的正方形内的所有点或者左下角6*6的正方形内的所有点</div><div class="line">				if (j &gt;= 4 &amp;&amp; i &lt;= arr.length - 5) &#123;</div><div class="line">					if (arr[i][j] == 1 &amp;&amp; arr[i + 1][j - 1] == 1</div><div class="line">							&amp;&amp; arr[i + 2][j - 2] == 1 &amp;&amp; arr[i + 3][j - 3] == 1</div><div class="line">							&amp;&amp; arr[i + 4][j - 4] == 1) &#123;</div><div class="line">						System.out.println(&quot;黑棋胜利&quot;);</div><div class="line">						this.blackWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">					if (arr[i][j] == 2 &amp;&amp; arr[i + 1][j - 1] == 2</div><div class="line">							&amp;&amp; arr[i + 2][j - 2] == 2 &amp;&amp; arr[i + 3][j - 3] == 2</div><div class="line">							&amp;&amp; arr[i + 4][j - 4] == 2) &#123;</div><div class="line">						System.out.println(&quot;白棋胜利&quot;);</div><div class="line">						this.whiteWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">				// \向判断，只判断左下角6*6的正方形内的所有点</div><div class="line">				if (i &lt;= arr.length - 5 &amp;&amp; j &lt;= arr[i].length - 5) &#123;</div><div class="line">					if (arr[i][j] == 1 &amp;&amp; arr[i + 1][j + 1] == 1</div><div class="line">							&amp;&amp; arr[i + 2][j + 2] == 1 &amp;&amp; arr[i + 3][j + 3] == 1</div><div class="line">							&amp;&amp; arr[i + 4][j + 4] == 1) &#123;</div><div class="line">						System.out.println(&quot;黑棋胜利&quot;);</div><div class="line">						this.blackWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">					if (arr[i][j] == 2 &amp;&amp; arr[i + 1][j + 1] == 2</div><div class="line">							&amp;&amp; arr[i + 2][j + 2] == 2 &amp;&amp; arr[i + 3][j + 3] == 2</div><div class="line">							&amp;&amp; arr[i + 4][j + 4] == 2) &#123;</div><div class="line">						System.out.println(&quot;白棋胜利&quot;);</div><div class="line">						this.whiteWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void mouseEntered(MouseEvent e) &#123;&#125;</div><div class="line">	public void mouseExited(MouseEvent e) &#123;&#125;</div><div class="line">	public void mousePressed(MouseEvent e) &#123;&#125;</div><div class="line">	public void mouseReleased(MouseEvent e) &#123;&#125;</div><div class="line"></div><div class="line">	public void blackWin() &#123;</div><div class="line">		Object[] options = &#123; &quot;确定&quot;, &quot;再玩一把&quot; &#125;;</div><div class="line">		int i = JOptionPane.showOptionDialog(null, &quot;黑棋获胜&quot;, &quot;游戏结束&quot;,</div><div class="line">				JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE, null,</div><div class="line">				options, null);</div><div class="line">		// 点确定返回0，点在玩一把返回1</div><div class="line">		if (i == 1) &#123;</div><div class="line">			this.restartGame();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void whiteWin() &#123;</div><div class="line">		Object[] options = &#123; &quot;确定&quot;, &quot;再玩一把&quot; &#125;;</div><div class="line">		int i = JOptionPane.showOptionDialog(null, &quot;白棋获胜&quot;, &quot;游戏结束&quot;,</div><div class="line">				JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE, null,</div><div class="line">				options, null);</div><div class="line">		// 点确定返回0，点在玩一把返回1</div><div class="line">		if (i == 1) &#123;</div><div class="line">			this.restartGame();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void restartGame() &#123;</div><div class="line">		// 清空数组</div><div class="line">		chesses.clear();</div><div class="line">		arr = null;</div><div class="line">		arr = new int[hengNum + 1][shuNum + 1];</div><div class="line">		flag = true;</div><div class="line">		isWin=false;</div><div class="line">		this.paint(getGraphics());</div><div class="line">	&#125;</div><div class="line">	//悔棋</div><div class="line">	public void backPreviousStep() &#123;</div><div class="line">		//移除最后下的一个棋子，更改棋盘信息</div><div class="line">		if(!chesses.isEmpty())&#123;</div><div class="line">			chesses.remove(chesses.size()-1);</div><div class="line">			arr[hang][lie]=0;</div><div class="line">			this.paint(getGraphics());</div><div class="line">			isWin=false; //胜利后悔棋了，还能继续下</div><div class="line">			//悔棋后下的棋子的颜色与悔的那粒一样</div><div class="line">			flag = flag==true?false:true;</div><div class="line">//			if (flag) &#123;</div><div class="line">//				flag=false;</div><div class="line">//			&#125; else &#123;</div><div class="line">//				flag=true;</div><div class="line">//			&#125;</div><div class="line">		&#125;else&#123;</div><div class="line">			return;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="MainFrame-java"><a href="#MainFrame-java" class="headerlink" title="MainFrame.java"></a>MainFrame.java</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">package com.review;</div><div class="line"></div><div class="line">import java.awt.Color;</div><div class="line">import java.awt.Container;</div><div class="line"></div><div class="line">import javax.swing.JFrame;</div><div class="line">import javax.swing.JPanel;</div><div class="line"></div><div class="line">public class MainFrame extends JFrame&#123;</div><div class="line">	</div><div class="line">	</div><div class="line">	</div><div class="line">	public MainFrame()&#123;</div><div class="line">		setTitle(&quot;五子棋&quot;);</div><div class="line">		setSize(500, 500);</div><div class="line">		setResizable(false);//设置大小不可变</div><div class="line">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</div><div class="line">		getContentPane().setBackground(new Color(0xFF0000));</div><div class="line">		setLocationRelativeTo(null);//设置居中</div><div class="line">		setVisible(true);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> Java学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[选择&循环]]></title>
+      <url>/2017/10/16/Java%E9%80%89%E6%8B%A9&amp;%E5%BE%AA%E7%8E%AF/</url>
+      <content type="html"><![CDATA[<h3 id="单分支选择结构-if"><a href="#单分支选择结构-if" class="headerlink" title="单分支选择结构( if )"></a>单分支选择结构( if )</h3><p><strong>if选择结构是根据条件判断之后再做处理</strong></p>
+<div id="flowchart-0" class="flow-chart"></div>
+
+<h3 id="if-else多重选择结构"><a href="#if-else多重选择结构" class="headerlink" title="if-else多重选择结构"></a>if-else多重选择结构</h3><div id="flowchart-1" class="flow-chart"></div>
+
+<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><div id="flowchart-2" class="flow-chart"></div>
+
+<h3 id="do…while循环"><a href="#do…while循环" class="headerlink" title="do…while循环"></a>do…while循环</h3><div id="flowchart-3" class="flow-chart"></div>
+
+
+<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><div id="flowchart-4" class="flow-chart"></div>
+
+<h3 id="continue与break"><a href="#continue与break" class="headerlink" title="continue与break"></a>continue与break</h3><ul>
+<li>在程序中，如果程序执行过程中碰到break，则跳出循环。</li>
+<li>在程序执行过程中，如果碰到continue，则结束本次循环，继续下一轮循环。<br><script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 代码
+op=>operation: 代码块
+cond=>condition: 条件?
+e=>end: 代码
+
+st->cond->op->e
+cond(yes)->op
+cond(no)->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><textarea id="flowchart-1-code" style="display: none">st=>start: 代码...
+op=>operation: 代码块1
+op1=>operation: 代码块2
+cond=>condition: 条件?
+e=>end: 代码...
+
+st->cond->op->e
+cond(yes)->op
+cond(no)->op1->e</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script><textarea id="flowchart-2-code" style="display: none">st=>start: 开始循环
+cond=>condition: 循环条件
+op=>operation: 循环操作
+e=>end: 循环结束
+
+st->cond->op->cond
+cond(yes)->op
+cond(no)->e</textarea><textarea id="flowchart-2-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-2-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-2-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-2", options);</script><textarea id="flowchart-3-code" style="display: none">st=>start: 开始循环
+cond=>condition: 循环条件
+op=>operation: 循环操作
+e=>end: 循环结束
+
+st->op->cond
+cond(yes)->op
+cond(no)->e</textarea><textarea id="flowchart-3-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-3-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-3-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-3", options);</script><textarea id="flowchart-4-code" style="display: none">st=>start: 开始循环
+cond=>condition: 判断条件
+op=>operation: 循环体
+op1=>operation: 循环变量增（减）值
+op2=>operation: 赋循环变量初值
+e=>end: 代码...
+
+st->op2->cond->op->op1->op2
+cond(yes)->op
+cond(no)->e</textarea><textarea id="flowchart-4-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-4-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-4-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-4", options);</script></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Java学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Java基本数据类型、标识符、运算符]]></title>
+      <url>/2017/10/16/Java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E3%80%81%E6%A0%87%E8%AF%86%E7%AC%A6%E3%80%81%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
+      <content type="html"><![CDATA[<h2 id="八大基本数据类型和他们的封装类"><a href="#八大基本数据类型和他们的封装类" class="headerlink" title="八大基本数据类型和他们的封装类"></a>八大基本数据类型和他们的封装类</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">基本数据类型</th>
+<th style="text-align:left">封装类</th>
+<th style="text-align:left">二进制位数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">boolean(布尔型)</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:left">byte(字节)</td>
+<td style="text-align:left">Byte</td>
+<td style="text-align:left">8</td>
+</tr>
+<tr>
+<td style="text-align:left">char(字符型)</td>
+<td style="text-align:left">Character</td>
+<td style="text-align:left">16</td>
+</tr>
+<tr>
+<td style="text-align:left">short(短整型)</td>
+<td style="text-align:left">Short</td>
+<td style="text-align:left">16</td>
+</tr>
+<tr>
+<td style="text-align:left">int(整型)</td>
+<td style="text-align:left">Integer</td>
+<td style="text-align:left">32</td>
+</tr>
+<tr>
+<td style="text-align:left">long(长整型)</td>
+<td style="text-align:left">Long</td>
+<td style="text-align:left">64</td>
+</tr>
+<tr>
+<td style="text-align:left">float(浮点型)</td>
+<td style="text-align:left">Float</td>
+<td style="text-align:left">32</td>
+</tr>
+<tr>
+<td style="text-align:left">double(双精度)</td>
+<td style="text-align:left">Double</td>
+<td style="text-align:left">64</td>
+</tr>
+</tbody>
+</table>
+<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><p>1.标识符可以由字母、数字、下划线（_）、美元符（$）组成，但不能包含 @、            %、空格等其它特殊字符，不能以数字开头。<br>2.标识符不能是 Java 关键字和保留字（ Java 预留的关键字，以后的升级版本中有可能作为关键字），但可以包含关键字和保留字。<br>3.标识符是严格区分大小写的。例如：tengdw 与 Tengdw 是两个不同的标识符。</p>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ul>
+<li>关系运算符：== != &gt; &gt;= &lt; &lt;= </li>
+<li>逻辑运算符：&amp;&amp; || ! &amp; |</li>
+<li>赋值运算符：= += -= *= /= …</li>
+<li>算术运算符：+ - * / % – ++ </li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Java学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[CentOS常用基础命令整理]]></title>
+      <url>/2017/10/15/CentOS%E5%B8%B8%E7%94%A8%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86/</url>
+      <content type="html"><![CDATA[<p>CentOS（Community Enterprise Operating System，中文意思是：社区企业操作系统）是Linux发行版之一，它是来自于Red Hat Enterprise Linux依照开放源代码规定释出的源代码所编译而成。由于出自同样的源代码，因此有些要求高度稳定性的服务器以CentOS替代商业版的Red Hat Enterprise Linux使用。两者的不同，在于CentOS并不包含封闭源代码软件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Linux命令格式：命令 [选项] [参数]</div></pre></td></tr></table></figure></p>
+<h2 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h2><p>查询目录中的内容：ls [选项] [文件或目录]<br>选项：</p>
+<ul>
+<li>-a 显示所有文件，包括隐藏文件</li>
+<li>-t 显示所有文件，并以更改时间排序</li>
+<li>-l    显示详细信息(ls -l = ll)</li>
+<li>-h    人性化显示文件大小</li>
+<li>-i    显示inode</li>
+<li>-s   显示所有文件，并且以区块为单位的形式表示文件和目录大小</li>
+<li>-R   显示所有文件，并将所有子目录的文件都列出来</li>
+</ul>
+<h2 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h2><p>建立目录：mkdir -p [目录名] </p>
+<ul>
+<li>-p 递归创建(例：mkdir -p abc/def)</li>
+<li>命令英文原意：make directories</li>
+</ul>
+<h2 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h2><p>切换所在目录：cd  [目录]</p>
+<ul>
+<li>命令英文原意：change directory</li>
+<li>cd ~    进入当前用户的home目录</li>
+<li>cd –    进入上次目录</li>
+<li>cd ..    进入上一级目录</li>
+<li>cd .    进入当前目录</li>
+</ul>
+<h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><ul>
+<li>Linux靠权限来识别文件类型</li>
+<li>–rw-r-r–</li>
+<li>–文件类型（-文件 &nbsp; d 目录 &nbsp; i 软链接文件）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">rw-</th>
+<th style="text-align:left">r–</th>
+<th style="text-align:left">r-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">u所有者</td>
+<td style="text-align:left">g所属组</td>
+<td style="text-align:left">o其他人</td>
+</tr>
+<tr>
+<td style="text-align:left">r读</td>
+<td style="text-align:left">w写</td>
+<td style="text-align:left">x执行</td>
+</tr>
+</tbody>
+</table>
+<h3 id="相对路径与绝对路径"><a href="#相对路径与绝对路径" class="headerlink" title="相对路径与绝对路径"></a>相对路径与绝对路径</h3><ul>
+<li>相对路径：参照当前所在目录，进行查找 <blockquote>
+<p>如：[root@valleyecho ~]# cd ../var/www/html/</p>
+</blockquote>
+</li>
+<li>绝对路径：从根目录开始指定，一级一级递归查找。在任何目录下都能进入指定位置 <blockquote>
+<p>如：[root@valleyecho ~]# cd /var/</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a>rmdir</h2><p>删除空目录：rmdir [目录名]<br>命令英文原意：remove empty directories<br><em>只能删除空目录</em></p>
+<h2 id="rm-rf"><a href="#rm-rf" class="headerlink" title="rm -rf"></a>rm -rf</h2><p>删除文件或目录：rm -rf [文件或目录]<br>命令英文原意：remove<br>选项：</p>
+<ul>
+<li>-r 删除目录</li>
+<li>-f 强制（force）</li>
+</ul>
+<h2 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h2><p>复制命令：cp [选项] [原文件或目录] [目标目录]<br>命令英文原意：copy<br>选项：</p>
+<ul>
+<li>-r 复制目录</li>
+<li>-p 连带文件属性复制</li>
+<li>-d 若源文件是链接文件，则复制链接属性</li>
+<li>-a 相当于 -pdr</li>
+</ul>
+<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><p>剪切命令：mv  [原文件或目录] [目标目录]<br>命令英文原意：move<br><strong>mv  [原文件名或目录名] [新的文件名或目录名]  #实现重命名操作</strong></p>
+<h2 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h2><p>链接命令：ln  [原文件] [目标文件]<br>命令英文原意：link<br>功能描述：生成链接文件<br>选项：</p>
+<ul>
+<li>-s 创建软链接</li>
+</ul>
+<h3 id="硬链接与软链接"><a href="#硬链接与软链接" class="headerlink" title="硬链接与软链接"></a>硬链接与软链接</h3><ul>
+<li>硬链接特征：<ol>
+<li>拥有相同的i节点和存储block块，可以看做是同一个文件</li>
+<li>可通过i节点识别</li>
+<li>不能跨分区</li>
+<li>不能针对目录使用</li>
+</ol>
+</li>
+<li>软链接特征：<ol>
+<li>类似Windows快捷方式</li>
+<li>软链接拥有自己的i节点和block块，但是 数据块中只保存源文件的文件名和i节点号，并没有实际的文件数据</li>
+<li>lrwxrwxrwx &nbsp; l 软链接 软链接文件权限都为rwxrwxrwx</li>
+<li>修改任意文件，另一个都改变</li>
+<li>删除原文件，软链接不能使用</li>
+</ol>
+</li>
+</ul>
+<h2 id="locate"><a href="#locate" class="headerlink" title="locate"></a>locate</h2><p>文件搜索命令：locate  [文件名]<br>在后台数据库中按文件名搜索，搜索速度更快</p>
+<ul>
+<li>/var/lib/mlocate   &nbsp;   #locate命令所搜索的后台数据库</li>
+<li>updatedb  &nbsp; #更新数据库</li>
+</ul>
+<h2 id="whereis"><a href="#whereis" class="headerlink" title="whereis"></a>whereis</h2><p>搜索命令的命令：whereis</p>
+<ul>
+<li>whereis 命令名  &nbsp;  #搜索命令所在路径及帮助文档所在位置</li>
+<li>-b    只查找可执行文件</li>
+<li>-m    只查找帮助文件</li>
+</ul>
+<h2 id="which"><a href="#which" class="headerlink" title="which"></a>which</h2><p>搜索命令的命令：which</p>
+<ul>
+<li>which    命令名  &nbsp;  #搜索命令所在路径及别名</li>
+</ul>
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>搜索命令：find</p>
+<ul>
+<li>find [搜索范围] [搜索条件]    #搜索文件</li>
+<li>find / -name install.log<br><em>避免大范围搜索，会非常耗费系统资源</em><br><em>find是在系统当中搜索符合条件的文件名。如果需要匹配使用通配符，通配符是完全匹配的</em><br>Linux中的通配符：<ol>
+<li>* 匹配任意内容</li>
+<li>? 匹配任意一个字符</li>
+<li>[] 匹配任意一个中括号内的字符</li>
+</ol>
+</li>
+<li>find /toot -iname install.log  &nbsp;  #不区分大小写</li>
+<li>find /root -user root  &nbsp;  #按照所有者搜索</li>
+<li>find /root -nouser  &nbsp;  #查找没有所有者的文件</li>
+<li>find /var/log/ -mtime +10  &nbsp;  #查找10天前修改的文件<blockquote>
+<p>-10    10天内修改的文件<br>10    10天当天内修改的文件<br>+10    10前内修改的文件<br>atime    文件访问时间<br>ctime    改变文件属性<br>mtime    修改文件内容</p>
+</blockquote>
+</li>
+<li>find . -size 25k    #查找文件大小是25kb的文件（小k，大M）<blockquote>
+<p>-25  &nbsp;  小于25kb的文件<br>25   &nbsp;  等于25kb的文件<br>+25  &nbsp; 大于25kb的文件</p>
+</blockquote>
+</li>
+<li>find . -inum 262422  &nbsp;  #查找i节点是262422的文件</li>
+<li>find /etc -size +20k -a -size -50k  &nbsp;  #查找/etc/目录下，大于20kb并且小于50kb的文件<blockquote>
+<p>-a  &nbsp;  and    逻辑与，两个条件都满足<br>-o  &nbsp;  or    逻辑或，两个条件满足一个即可</p>
+</blockquote>
+</li>
+<li>find /etc -size +20k -a -size -50k -exec ls -lh {} \;<br>查找/etc/目录下，大于20kb并且小于50kb的文件,并显示详细信息<br>-exec 与 {} \;是配对使用的，固定格式,对操作结果执行操作</li>
+</ul>
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>搜索字符串命令：grep<br>grep [选项] 字符串 文件名  &nbsp;  #在文件当中匹配符合条件的字符串<br>选项：</p>
+<ul>
+<li>-i 忽略大小写</li>
+<li>-v 排除指定字符串</li>
+</ul>
+<h2 id="man"><a href="#man" class="headerlink" title="man"></a>man</h2><p>帮助命令</p>
+<ul>
+<li>man [选项] [参数]  &nbsp;  #获取指定命令的帮助</li>
+<li>例：man ls  &nbsp;  #查看ls的帮助</li>
+<li>[命令] -  -help  &nbsp;  #获取命令选项的帮助 例：ls - -help</li>
+</ul>
+<h2 id="压缩与解压缩命令"><a href="#压缩与解压缩命令" class="headerlink" title="压缩与解压缩命令"></a>压缩与解压缩命令</h2><p>Linux常用压缩格式：.zip  &nbsp;  .gz  &nbsp;  .bz2<br>常用压缩格式：.tar.gz  &nbsp;  .tar.bz2</p>
+<h2 id="zip格式压缩与解压缩"><a href="#zip格式压缩与解压缩" class="headerlink" title=".zip格式压缩与解压缩"></a>.zip格式压缩与解压缩</h2><ul>
+<li>zip [压缩文件名.zip] [源文件名]  &nbsp;  #压缩文件</li>
+<li>zip -r [压缩文件名.zip] [源目录]  &nbsp;  #压缩目录</li>
+<li>unzip [压缩文件名]  &nbsp;  #解压缩.zip文件</li>
+</ul>
+<h2 id="gz格式压缩"><a href="#gz格式压缩" class="headerlink" title=".gz格式压缩"></a>.gz格式压缩</h2><ul>
+<li>gzip [源文件名]  &nbsp;  #压缩为.gz格式的压缩文件，源文件会消失</li>
+<li>gzip -c [源文件名] &gt; [压缩文件名.gz]  &nbsp;  #压缩为.gz格式，源文件保留</li>
+<li>gzip -r [目录名]  &nbsp;  #压缩目录下所有的子文件，但是不能压缩目录</li>
+</ul>
+<h2 id="bz2格式压缩与解压缩"><a href="#bz2格式压缩与解压缩" class="headerlink" title=".bz2格式压缩与解压缩"></a>.bz2格式压缩与解压缩</h2><ul>
+<li>bzip2 [源文件名]  &nbsp;  #压缩为.bz2格式，不保留源文件</li>
+<li>bzip2 -k [源文件名]  &nbsp;  #压缩之后保留原文件</li>
+<li>注意：bzip2命令不能压缩目录</li>
+<li>bzip2 -d [压缩文件名]  &nbsp;  #解压缩，-k保留压缩文件</li>
+<li>bunzip2 [压缩文件名]  &nbsp;  #解压缩，-k保留压缩文件</li>
+</ul>
+<h2 id="打包与解打包"><a href="#打包与解打包" class="headerlink" title="打包与解打包"></a>打包与解打包</h2><ul>
+<li>tar -cvf  [打包文件名.tar]  [源文件名]<br>选项：</li>
+<li>-c  打包</li>
+<li>-v  显示过程</li>
+<li>-f  指定打包后的文件名</li>
+<li>tar -xvf [打包文件名]  #-x   解打包</li>
+</ul>
+<h2 id="tar-gz压缩与解压缩"><a href="#tar-gz压缩与解压缩" class="headerlink" title=".tar.gz压缩与解压缩"></a>.tar.gz压缩与解压缩</h2><ul>
+<li>.tar.gz格式是先打包为.tar格式，在压缩为.gz格式</li>
+<li>tar -zcvf [(可加其他目录)压缩包名.tar.gz] [源文件] &nbsp; #-z   压缩为 .tar.gz格式</li>
+<li>tar -zxvf [压缩包名.tar.gz] &nbsp; #-x  解压缩.tar.gz格式</li>
+<li>tar -zxvf [压缩包名.tar.bz2] -C [目标目录] &nbsp; #解压文件到目标目录</li>
+</ul>
+<h2 id="tar-bz2压缩与解压缩"><a href="#tar-bz2压缩与解压缩" class="headerlink" title=".tar.bz2压缩与解压缩"></a>.tar.bz2压缩与解压缩</h2><ul>
+<li>tar -jcvf [压缩包名.tar.bz2] [源文件] &nbsp; #-z   压缩为 .tar.bz2格式</li>
+<li>tar -jxvf [压缩包名.tar.bz2] &nbsp; #-x    解压缩.tar.bz2格式</li>
+</ul>
+<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2><ul>
+<li>w  &nbsp;  #查看用户登录信息（详细）</li>
+<li>who [用户名] &nbsp; #查看用户登录信息</li>
+<li>last &nbsp; #查询当前登录和过去登录的用户信息</li>
+<li>lastlog &nbsp; #查看所有用户的最后一次登录时间</li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[梅林安装ss插件]]></title>
+      <url>/2017/10/15/%E6%A2%85%E6%9E%97%E5%AE%89%E8%A3%85ss%E6%8F%92%E4%BB%B6/</url>
+      <content type="html"><![CDATA[<p>前几天给K3刷了梅林固件（LEDE用起来太麻烦了），由于现在严查番羽墙梅林软件中心的ss插件被迫下架了，所以需要手动安装</p>
+<ol>
+<li>先启用梅林的SSH：系统管理-&gt;系统设置-&gt;SSH Daemon-&gt;Allow SSH Port Forwarding 选是再点击应用本页面设置</li>
+<li>用SSH客户端登录（地址：路由器的默认网关；用户名：默认是admin；密码：路由器的管理密码）然后一句一句执行下面命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cd /tmp</div><div class="line">wget http://valleyecho-1252960615.cosgz.myqcloud.com/shadowsocks.tar.gz</div><div class="line">tar -zxvf /tmp//shadowsocks.tar.gz    #解压</div><div class="line">chmod +x /tmp/shadowsocks/install.sh    #授予执行权限</div><div class="line">sh /tmp/shadowsocks/install.sh    #执行</div></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> 硬件玩家 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 路由器 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[多重循环&数组]]></title>
+      <url>/2017/10/14/%E5%A4%9A%E9%87%8D%E5%BE%AA%E7%8E%AF-%E6%95%B0%E7%BB%84/</url>
+      <content type="html"><![CDATA[<h2 id="多重循环"><a href="#多重循环" class="headerlink" title="多重循环"></a>多重循环</h2><p>循环体中包含循环语句的结构称为多重循环。三种循环语句(while;do…while;for)可以自身嵌套，也可以相互嵌套，最常见的就是二重循环。在二重循环中，外层循环每执行一次，内层循环要执行一圈。</p>
+<blockquote>
+<p>例：打印10*10的点阵</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">for (int i = 1; i &lt;= 10; i++) &#123;</div><div class="line">	for (int j = 0; j &lt;= 10; j++) &#123;</div><div class="line">		System.out.print(&quot;* &quot;);</div><div class="line">	&#125;</div><div class="line">	System.out.println();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>控制台输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * * </div><div class="line">* * * * * * * * * * *</div></pre></td></tr></table></figure></p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>数组是一个变量，存储相同数据类型的一组数据<br><em>数组的声明：</em></p>
+<ol>
+<li>声明一个变量是在内存空间划分出一块合适的空间</li>
+<li>声明一个数组是在内存空间划出一串连续的空间<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">int arr[];    //声明数组名</div><div class="line">arr = new int[5]    //分配5个数的存储空间</div><div class="line">arr[0]=2; arr[1]=4; ... ...arr[4]=4;    //赋值</div></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Java学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Java OOP]]></title>
+      <url>/2017/10/14/Java-OOP/</url>
+      <content type="html"><![CDATA[<p>Java OOP ( Object Oriented Program——面向对象编程 )，OOP的四大支柱：继承、封装、多态、抽象</p>
+<h2 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h2><ol>
+<li>类(Class)：定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。在Java中类包括属性和方法（构造方法）；构造方法没有返回值类型，也不能有返回值。父类中的构造方法不能被子类继承，即便它是public的</li>
+<li>对象：是类的实例。对象可以用来调用类里面的方法。</li>
+</ol>
+<h2 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h2><ol>
+<li>如果函数有相同的名称和返回值，而有不同的参数个数或参数类型，则这些函数就是重载函数。</li>
+<li>方法重载也称为静态多态。</li>
+<li>重载的三个特征：方法名相同、参数不同（包括参数数量不同、类型不同、顺序不同）、同一作用域。</li>
+</ol>
+<h2 id="继承-extends"><a href="#继承-extends" class="headerlink" title="继承(extends)"></a>继承(extends)</h2><ol>
+<li>继承的方法允许在不改动原程序的基础上对其进行扩充，这样使得原功能得以保存，而新功能也得以扩展。这有利于减少重复编码，提高软件的开发效率。</li>
+<li>一个类可以继承其它类的成员，被继承的类叫基类或父类；继承类叫派生类或子类。</li>
+<li>派生类不但拥有自己的成员变量和成员函数，还拥有父类的成员变量和成员函数。</li>
+</ol>
+<h2 id="重写"><a href="#重写" class="headerlink" title="重写"></a>重写</h2><ol>
+<li>父类与子类之间的多态性，对父类的函数进行重新定义。如果在子类中定义某方法与其父类有相同的名称和参数，我们说该方法被重写(Overriding)。在Java中，子类可继承父类中的方法，而不需要重新编写相同的方法。但有时子类并不想原封不动地继承父类的方法，而是想作一定的修改，这就需要采用方法的重写。方法重写又称方法覆盖。</li>
+<li>若子类中的方法与父类中的某一方法具有相同的方法名、返回类型和参数表，则新方法将覆盖原有的方法。如需父类中原有的方法，可使用super关键字，该关键字引用了当前类的父类。</li>
+<li>子类函数的访问修饰权限不能少于父类的。</li>
+</ol>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><ol>
+<li>多态存在的三个必要条件：继承、重写、父类引用指向子类对象</li>
+<li>多态的优点：消除类型之间的耦合关系、可替换性、可扩充性、接口性、灵活性、简化性</li>
+</ol>
+<h2 id="抽象类和接口"><a href="#抽象类和接口" class="headerlink" title="抽象类和接口"></a>抽象类和接口</h2><ol>
+<li>抽象类：class前面用abstract修饰、在方法前面加上abstract关键字，且没有实现、如果某各类中有抽象方法，这个类就是抽象类</li>
+<li>抽象类特点：子类如果不实现父类的抽象方法，那么子类也是抽象类、不能创建对象，但是可以引用子类对象</li>
+<li>接口：定义语法：public interface 接口名{} 、接口中只能包含常量属性和未实现的方法</li>
+<li>接口的特点：接口的所有属性和方法必须用public修饰、不能new对象、接口可以继承多个接口</li>
+</ol>
+<h2 id="final和static修饰符"><a href="#final和static修饰符" class="headerlink" title="final和static修饰符"></a>final和static修饰符</h2><ol>
+<li>final：修饰属性：此变量不能被修改，一般是常量的修饰符；修饰方法：此方法不能被覆盖；修饰类：此类不能被继承。</li>
+<li>static：静态；在一个类中被修饰的变量和方法不需要引用可以直接调用。</li>
+</ol>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//懒汉式单例类.在第一次调用的时候实例化自己   </span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton single=<span class="keyword">null</span>;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">         <span class="keyword">if</span> (single == <span class="keyword">null</span>) &#123;    </div><div class="line">             single = <span class="keyword">new</span> Singleton();  </div><div class="line">         &#125;    </div><div class="line">        <span class="keyword">return</span> single;  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"><span class="comment">//饿汉式单例类.在类初始化时，已经自行实例化   </span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton1</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton1</span><span class="params">()</span> </span>&#123;&#125;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton1 single = <span class="keyword">new</span> Singleton1();  </div><div class="line">    <span class="comment">//静态工厂方法   </span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton1 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> single;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> Java学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>

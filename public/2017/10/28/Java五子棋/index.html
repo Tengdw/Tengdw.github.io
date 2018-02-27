@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            Java五子棋 | 
+        
+        Tengdw&#39;s blog
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Tengdw">
+    <meta name="description" itemprop="description" content="个人博客,IT技术,Java">
+    <meta name="keywords" content=",Java">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Tengdw&#39;s blog">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?MKetZV3cUTfDxvMffaOezg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.bootcss.com/jquery/2.2.1/jquery.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Java五子棋 | Tengdw&#39;s blog">
+    <meta property="og:image" content="http://yoursite.com/img/favicon.png" />
+    <meta property="og:description" content="个人博客,IT技术,Java">
+    <meta property="og:article:tag" content="Java"> 
+
+    
+        <meta property="article:published_time" content="Fri Oct 27 2017 18:43:50 GMT+0000" />
+        <meta property="article:modified_time" content="Tue Feb 27 2018 16:26:45 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Java五子棋 | Tengdw&#39;s blog">
+    <meta name="twitter:description" content="个人博客,IT技术,Java">
+    <meta name="twitter:image" content="http://yoursite.com/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="http://yoursite.com" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://yoursite.com/2017/10/28/Java五子棋/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://yoursite.com/2017/10/28/Java五子棋/index.html",
+    "headline": "Java五子棋",
+    "datePublished": "Fri Oct 27 2017 18:43:50 GMT+0000",
+    "dateModified": "Tue Feb 27 2018 16:26:45 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "Tengdw",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tengdw&#39;s blog",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",Java",
+    "description": "个人博客,IT技术,Java",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Chess-java"><span class="post-toc-number">1.</span> <span class="post-toc-text">Chess.java</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GameFrame-java"><span class="post-toc-number">2.</span> <span class="post-toc-text">GameFrame.java</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GamePanel-java"><span class="post-toc-number">3.</span> <span class="post-toc-text">GamePanel.java</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MainFrame-java"><span class="post-toc-number">4.</span> <span class="post-toc-text">MainFrame.java</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Java五子棋
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Tengdw</strong>
+        <span>10月 27, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Java/">Java</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Java五子棋&url=http://yoursite.com/2017/10/28/Java五子棋/index.html&pic=http://yoursite.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Java五子棋&url=http://yoursite.com/2017/10/28/Java五子棋/index.html&via=Tengdw" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/10/28/Java五子棋/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com/2017/10/28/Java五子棋/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>实现了准确下子、黑白交替下子、移动窗口棋子不会丢失、五连子判定、重新开始、悔棋</p>
+<h2 id="Chess-java"><a href="#Chess-java" class="headerlink" title="Chess.java"></a>Chess.java</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">package com.review;</div><div class="line"></div><div class="line">public class Chess &#123;</div><div class="line">	public int x,y;</div><div class="line">	public boolean isBlack;//表示是黑还是白</div><div class="line">	public static int chessWidth=30;//棋子大小</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public int hashCode() &#123;</div><div class="line">		return 1;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public boolean equals(Object obj) &#123;</div><div class="line">		if(this==obj)&#123;</div><div class="line">			return true;</div><div class="line">		&#125;</div><div class="line">		if(obj instanceof Chess)&#123;</div><div class="line">			Chess c=(Chess) obj;</div><div class="line">			if(c.x==this.x &amp;&amp; c.y==this.y)&#123;</div><div class="line">				return true;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="GameFrame-java"><a href="#GameFrame-java" class="headerlink" title="GameFrame.java"></a>GameFrame.java</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">package com.hp.review;</div><div class="line"></div><div class="line"></div><div class="line">import java.awt.event.ActionEvent;</div><div class="line">import java.awt.event.ActionListener;</div><div class="line">import java.awt.event.MouseEvent;</div><div class="line">import java.awt.event.MouseListener;</div><div class="line"></div><div class="line">import javax.swing.JMenu;</div><div class="line">import javax.swing.JMenuBar;</div><div class="line">import javax.swing.JMenuItem;</div><div class="line">import javax.swing.JPanel;</div><div class="line"></div><div class="line">import com.hp.test.Test;</div><div class="line"></div><div class="line">public class GameFrame extends MainFrame &#123;</div><div class="line">	private GamePanel gp;</div><div class="line">	public GameFrame()&#123;</div><div class="line">		//创建面板对象</div><div class="line">		gp=new GamePanel();</div><div class="line">		add(gp);</div><div class="line">		//JPanel jp = (JPanel) getContentPane();</div><div class="line">		//添加菜单栏</div><div class="line">		JMenuBar jmb = new JMenuBar();</div><div class="line">		setJMenuBar(jmb);</div><div class="line">		JMenu jm = new JMenu(&quot;选项&quot;);</div><div class="line">		jmb.add(jm);</div><div class="line">		//为菜单添加子菜单</div><div class="line">		JMenuItem jmi1 = new JMenuItem(&quot;重新开始&quot;);</div><div class="line">		JMenuItem jmi2 = new JMenuItem(&quot;悔棋&quot;);</div><div class="line">		jm.add(jmi1);</div><div class="line">		jm.add(jmi2);</div><div class="line">		jmi1.addActionListener(new ActionListener() &#123;</div><div class="line">			@Override</div><div class="line">			public void actionPerformed(ActionEvent e) &#123;</div><div class="line">				gp.restartGame();</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">		jmi2.addActionListener(new ActionListener() &#123;</div><div class="line">			@Override</div><div class="line">			public void actionPerformed(ActionEvent e) &#123;</div><div class="line">				gp.backPreviousStep();</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		Test.setDebug(true);</div><div class="line">		new GameFrame();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="GamePanel-java"><a href="#GamePanel-java" class="headerlink" title="GamePanel.java"></a>GamePanel.java</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div></pre></td><td class="code"><pre><div class="line">package com.hp.review;</div><div class="line"></div><div class="line">import java.awt.Color;</div><div class="line">import java.awt.Graphics;</div><div class="line">import java.awt.Point;</div><div class="line">import java.awt.event.MouseEvent;</div><div class="line">import java.awt.event.MouseListener;</div><div class="line">import java.util.ArrayList;</div><div class="line">import java.util.Arrays;</div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">import javax.swing.JOptionPane;</div><div class="line">import javax.swing.JPanel;</div><div class="line"></div><div class="line">import com.hp.test.Test;</div><div class="line"></div><div class="line">public class GamePanel extends JPanel implements MouseListener &#123;</div><div class="line">	private int boxWidth = 48;// 每个格子的宽高</div><div class="line">	private int startX = 20, stratY = 20;// 棋盘绘制的起点坐标</div><div class="line">	private int hengNum = 10, shuNum = 10;// henNum表示多少行，shuNum表示多少列</div><div class="line">	private int hang,lie;</div><div class="line">	private boolean flag = true;// 控制绘制黑棋还是白棋的变量，为true绘制黑棋，为false绘制白棋</div><div class="line">	private boolean isWin = false; // 如果有人胜利isWin赋值为true</div><div class="line">	private List&lt;Chess&gt; chesses;</div><div class="line">	// 指定行列值为0，则认为没有落子，如果为1咯黑子，2落了白字</div><div class="line">	private int arr[][] = new int[hengNum + 1][shuNum + 1];// 存储棋盘上每一个交叉点信息的二维数组，hengNum=10,shuNum=10但是有11*11个点</div><div class="line"></div><div class="line">	// 低耦合，高内聚</div><div class="line">	public GamePanel() &#123;</div><div class="line">		chesses = new ArrayList&lt;Chess&gt;();</div><div class="line">		setBackground(Color.YELLOW);</div><div class="line">		addMouseListener(this);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void paint(Graphics g) &#123;</div><div class="line"></div><div class="line">		super.paint(g);// 绘制面板本身</div><div class="line">		// 绘制棋盘</div><div class="line">		// 画10条横线</div><div class="line">		for (int i = 0; i &lt;= hengNum; i++) &#123;</div><div class="line">			g.drawLine(startX, stratY + i * boxWidth, shuNum * boxWidth</div><div class="line">					+ startX, stratY + i * boxWidth);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		// 绘制10竖线</div><div class="line">		for (int i = 0; i &lt;= shuNum; i++) &#123;</div><div class="line">			g.drawLine(startX + i * boxWidth, stratY, startX + i * boxWidth,</div><div class="line">					hengNum * boxWidth + stratY);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		// 在paint方法中绘制棋子保证最小化以后不丢失</div><div class="line">		for (int i = 0; i &lt; chesses.size(); i++) &#123;</div><div class="line">			Chess c = chesses.get(i);</div><div class="line">			g.setColor(c.isBlack == true ? Color.black : Color.white);</div><div class="line">			g.fillOval(c.x, c.y, c.chessWidth, c.chessWidth);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	// 点击</div><div class="line">	public void mouseClicked(MouseEvent e) &#123;</div><div class="line">		// 如果有人获胜了不会执行此方法</div><div class="line">		if (isWin) &#123;</div><div class="line">			return;</div><div class="line">		&#125;</div><div class="line">		Graphics g = getGraphics();</div><div class="line">		Point p = e.getPoint();// 鼠标点击点的坐标</div><div class="line">		// 排除棋盘外的点击</div><div class="line">		if (p.x &lt; startX || p.y &lt; stratY || p.x &gt; (startX + boxWidth * shuNum)</div><div class="line">				|| p.y &gt; (stratY + boxWidth * hengNum)) &#123;</div><div class="line">			return;</div><div class="line">		&#125;</div><div class="line">		// 确定落子的行和列</div><div class="line">		hang = (int) Math.round((p.y - stratY) * 1.0 / boxWidth);</div><div class="line">		lie = (int) Math.round((p.x - startX) * 1.0 / boxWidth);</div><div class="line">		Test.print(hang + &quot;   &quot; + lie);</div><div class="line"></div><div class="line">		// 确定落子交叉点的坐标</div><div class="line">		int x = lie * boxWidth + startX - Chess.chessWidth / 2;</div><div class="line">		int y = hang * boxWidth + stratY - Chess.chessWidth / 2;</div><div class="line">		// 落子</div><div class="line">		// if(flag)&#123;</div><div class="line">		// g.setColor(new Color(0x000000));</div><div class="line">		// &#125;else&#123;</div><div class="line">		// g.setColor(new Color(0xFFFFFF));</div><div class="line">		// &#125;</div><div class="line"></div><div class="line">		// 将绘制的棋子存储到集合中</div><div class="line">		Chess c = new Chess();</div><div class="line">		c.x = x;</div><div class="line">		c.y = y;</div><div class="line">		c.isBlack = flag;</div><div class="line">		if (!chesses.contains(c)) &#123;</div><div class="line">			g.setColor(flag == true ? Color.BLACK : Color.WHITE);</div><div class="line">			g.fillOval(x, y, Chess.chessWidth, Chess.chessWidth);</div><div class="line">			arr[hang][lie] = c.isBlack == true ? 1 : 2;</div><div class="line">			chesses.add(c);</div><div class="line">			flag = !flag;// 必须放在循环内</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		// 打印输出二维数组的值</div><div class="line">		System.out.println();</div><div class="line">		for (int i = 0; i &lt; arr.length; i++) &#123;</div><div class="line">			for (int j = 0; j &lt; arr[i].length; j++) &#123;</div><div class="line">				Test.print(arr[i][j] + &quot;  &quot;);</div><div class="line">			&#125;</div><div class="line">			System.out.println();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		for (int i = 0; i &lt; arr.length; i++) &#123;</div><div class="line">			for (int j = 0; j &lt; arr[i].length; j++) &#123;</div><div class="line">				// 横向判断</div><div class="line">				if (j &lt;= arr[i].length - 5) &#123;</div><div class="line">					if (arr[i][j] == 1 &amp;&amp; arr[i][j + 1] == 1</div><div class="line">							&amp;&amp; arr[i][j + 2] == 1 &amp;&amp; arr[i][j + 3] == 1</div><div class="line">							&amp;&amp; arr[i][j + 4] == 1) &#123;</div><div class="line">						System.out.println(&quot;黑棋胜利&quot;);</div><div class="line">						this.blackWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">					if (arr[i][j] == 2 &amp;&amp; arr[i][j + 1] == 2</div><div class="line">							&amp;&amp; arr[i][j + 2] == 2 &amp;&amp; arr[i][j + 3] == 2</div><div class="line">							&amp;&amp; arr[i][j + 4] == 2) &#123;</div><div class="line">						System.out.println(&quot;白棋胜利&quot;);</div><div class="line">						this.whiteWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">				// 竖向判断</div><div class="line">				if (i &lt;= arr.length - 5) &#123;</div><div class="line">					if (arr[i][j] == 1 &amp;&amp; arr[i + 1][j] == 1</div><div class="line">							&amp;&amp; arr[i + 2][j] == 1 &amp;&amp; arr[i + 3][j] == 1</div><div class="line">							&amp;&amp; arr[i + 4][j] == 1) &#123;</div><div class="line">						System.out.println(&quot;黑棋胜利&quot;);</div><div class="line">						this.blackWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">					if (arr[i][j] == 2 &amp;&amp; arr[i + 1][j] == 2</div><div class="line">							&amp;&amp; arr[i + 2][j] == 2 &amp;&amp; arr[i + 3][j] == 2</div><div class="line">							&amp;&amp; arr[i + 4][j] == 2) &#123;</div><div class="line">						System.out.println(&quot;白棋胜利&quot;);</div><div class="line">						this.whiteWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">				// /向判断,只判断右上角6*6的正方形内的所有点或者左下角6*6的正方形内的所有点</div><div class="line">				if (j &gt;= 4 &amp;&amp; i &lt;= arr.length - 5) &#123;</div><div class="line">					if (arr[i][j] == 1 &amp;&amp; arr[i + 1][j - 1] == 1</div><div class="line">							&amp;&amp; arr[i + 2][j - 2] == 1 &amp;&amp; arr[i + 3][j - 3] == 1</div><div class="line">							&amp;&amp; arr[i + 4][j - 4] == 1) &#123;</div><div class="line">						System.out.println(&quot;黑棋胜利&quot;);</div><div class="line">						this.blackWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">					if (arr[i][j] == 2 &amp;&amp; arr[i + 1][j - 1] == 2</div><div class="line">							&amp;&amp; arr[i + 2][j - 2] == 2 &amp;&amp; arr[i + 3][j - 3] == 2</div><div class="line">							&amp;&amp; arr[i + 4][j - 4] == 2) &#123;</div><div class="line">						System.out.println(&quot;白棋胜利&quot;);</div><div class="line">						this.whiteWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">				// \向判断，只判断左下角6*6的正方形内的所有点</div><div class="line">				if (i &lt;= arr.length - 5 &amp;&amp; j &lt;= arr[i].length - 5) &#123;</div><div class="line">					if (arr[i][j] == 1 &amp;&amp; arr[i + 1][j + 1] == 1</div><div class="line">							&amp;&amp; arr[i + 2][j + 2] == 1 &amp;&amp; arr[i + 3][j + 3] == 1</div><div class="line">							&amp;&amp; arr[i + 4][j + 4] == 1) &#123;</div><div class="line">						System.out.println(&quot;黑棋胜利&quot;);</div><div class="line">						this.blackWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">					if (arr[i][j] == 2 &amp;&amp; arr[i + 1][j + 1] == 2</div><div class="line">							&amp;&amp; arr[i + 2][j + 2] == 2 &amp;&amp; arr[i + 3][j + 3] == 2</div><div class="line">							&amp;&amp; arr[i + 4][j + 4] == 2) &#123;</div><div class="line">						System.out.println(&quot;白棋胜利&quot;);</div><div class="line">						this.whiteWin();</div><div class="line">						isWin = true;</div><div class="line">						break;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void mouseEntered(MouseEvent e) &#123;&#125;</div><div class="line">	public void mouseExited(MouseEvent e) &#123;&#125;</div><div class="line">	public void mousePressed(MouseEvent e) &#123;&#125;</div><div class="line">	public void mouseReleased(MouseEvent e) &#123;&#125;</div><div class="line"></div><div class="line">	public void blackWin() &#123;</div><div class="line">		Object[] options = &#123; &quot;确定&quot;, &quot;再玩一把&quot; &#125;;</div><div class="line">		int i = JOptionPane.showOptionDialog(null, &quot;黑棋获胜&quot;, &quot;游戏结束&quot;,</div><div class="line">				JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE, null,</div><div class="line">				options, null);</div><div class="line">		// 点确定返回0，点在玩一把返回1</div><div class="line">		if (i == 1) &#123;</div><div class="line">			this.restartGame();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void whiteWin() &#123;</div><div class="line">		Object[] options = &#123; &quot;确定&quot;, &quot;再玩一把&quot; &#125;;</div><div class="line">		int i = JOptionPane.showOptionDialog(null, &quot;白棋获胜&quot;, &quot;游戏结束&quot;,</div><div class="line">				JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE, null,</div><div class="line">				options, null);</div><div class="line">		// 点确定返回0，点在玩一把返回1</div><div class="line">		if (i == 1) &#123;</div><div class="line">			this.restartGame();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void restartGame() &#123;</div><div class="line">		// 清空数组</div><div class="line">		chesses.clear();</div><div class="line">		arr = null;</div><div class="line">		arr = new int[hengNum + 1][shuNum + 1];</div><div class="line">		flag = true;</div><div class="line">		isWin=false;</div><div class="line">		this.paint(getGraphics());</div><div class="line">	&#125;</div><div class="line">	//悔棋</div><div class="line">	public void backPreviousStep() &#123;</div><div class="line">		//移除最后下的一个棋子，更改棋盘信息</div><div class="line">		if(!chesses.isEmpty())&#123;</div><div class="line">			chesses.remove(chesses.size()-1);</div><div class="line">			arr[hang][lie]=0;</div><div class="line">			this.paint(getGraphics());</div><div class="line">			isWin=false; //胜利后悔棋了，还能继续下</div><div class="line">			//悔棋后下的棋子的颜色与悔的那粒一样</div><div class="line">			flag = flag==true?false:true;</div><div class="line">//			if (flag) &#123;</div><div class="line">//				flag=false;</div><div class="line">//			&#125; else &#123;</div><div class="line">//				flag=true;</div><div class="line">//			&#125;</div><div class="line">		&#125;else&#123;</div><div class="line">			return;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="MainFrame-java"><a href="#MainFrame-java" class="headerlink" title="MainFrame.java"></a>MainFrame.java</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">package com.review;</div><div class="line"></div><div class="line">import java.awt.Color;</div><div class="line">import java.awt.Container;</div><div class="line"></div><div class="line">import javax.swing.JFrame;</div><div class="line">import javax.swing.JPanel;</div><div class="line"></div><div class="line">public class MainFrame extends JFrame&#123;</div><div class="line">	</div><div class="line">	</div><div class="line">	</div><div class="line">	public MainFrame()&#123;</div><div class="line">		setTitle(&quot;五子棋&quot;);</div><div class="line">		setSize(500, 500);</div><div class="line">		setResizable(false);//设置大小不可变</div><div class="line">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</div><div class="line">		getContentPane().setBackground(new Color(0xFF0000));</div><div class="line">		setLocationRelativeTo(null);//设置居中</div><div class="line">		setVisible(true);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/10/30/Ubuntu下配置Git/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/10/16/Java选择&循环/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Tengdw's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        t_dw@qq.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_o6lno26i4vUmZWX" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">8</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Java学习/">Java学习<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/Ubuntu/">Ubuntu<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/服务器/">服务器<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/硬件玩家/">硬件玩家<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Page_tags  -->
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">local_offer</i>
+                
+                标签云
+            </a>
+        </li>
+        
+    
+
+    <!-- Page_gallery  -->
+    
+
+    <!-- Page_timeline  -->
+    
+        <li>
+            <a href="/timeline" title="时间轴">
+                
+                    <i class="material-icons sidebar-material-icons">timeline</i>
+                
+                时间轴
+            </a>
+        </li>
+        
+    
+
+    <!-- Page_friend  -->
+    
+        <li>
+            <a href="/links" title="友链">
+                
+                    <i class="material-icons sidebar-material-icons">link</i>
+                
+                友链
+            </a>
+        </li>
+        
+    
+
+    <!-- Page_about  -->
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">12</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-facebook">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/Tengdw" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+        <a href="https://space.bilibili.com/17352974/#!/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-bilibili">
+                <span class="visuallyhidden">Bilibili</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>Tengdw's blog
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?V/53wGualMuiPM3xoetD5Q==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.bootcss.com/nprogress/0.2.0/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+    
+        <script>lsloader.load("sm_js","/js/smoothscroll.js?lOy/ACj5suSNi7ZVFVbpFQ==", true)</script>
+    
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

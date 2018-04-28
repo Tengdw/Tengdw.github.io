@@ -487,7 +487,7 @@
         <p>前几天给K3刷了梅林固件（LEDE用起来太麻烦了），由于现在严查番羽墙梅林软件中心的ss插件被迫下架了，所以需要手动安装</p>
 <ol>
 <li>先启用梅林的SSH：系统管理-&gt;系统设置-&gt;SSH Daemon-&gt;Allow SSH Port Forwarding 选是再点击应用本页面设置</li>
-<li>用SSH客户端登录（地址：路由器的默认网关；用户名：默认是admin；密码：路由器的管理密码）然后一句一句执行下面命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cd /tmp</div><div class="line">wget http://valleyecho-1252960615.cosgz.myqcloud.com/shadowsocks.tar.gz</div><div class="line">tar -zxvf /tmp//shadowsocks.tar.gz    #解压</div><div class="line">chmod +x /tmp/shadowsocks/install.sh    #授予执行权限</div><div class="line">sh /tmp/shadowsocks/install.sh    #执行</div></pre></td></tr></table></figure>
+<li>用SSH客户端登录（地址：路由器的默认网关；用户名：默认是admin；密码：路由器的管理密码）然后一句一句执行下面命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget http://valleyecho-1252960615.cosgz.myqcloud.com/shadowsocks.tar.gz</span><br><span class="line">tar -zxvf /tmp//shadowsocks.tar.gz    #解压</span><br><span class="line">chmod +x /tmp/shadowsocks/install.sh    #授予执行权限</span><br><span class="line">sh /tmp/shadowsocks/install.sh    #执行</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 

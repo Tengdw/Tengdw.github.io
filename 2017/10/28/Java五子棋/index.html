@@ -98,6 +98,11 @@
         <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?MKetZV3cUTfDxvMffaOezg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
 
     
 
@@ -238,7 +243,7 @@
 
     
         <meta property="article:published_time" content="Fri Oct 27 2017 18:43:50 GMT+0000" />
-        <meta property="article:modified_time" content="Tue Feb 27 2018 16:26:45 GMT+0800" />
+        <meta property="article:modified_time" content="Thu May 24 2018 10:32:32 GMT+0800" />
     
 
     <!-- The Twitter Card protocol -->
@@ -265,7 +270,7 @@
     "mainEntityOfPage": "http://yoursite.com/2017/10/28/Java五子棋/index.html",
     "headline": "Java五子棋",
     "datePublished": "Fri Oct 27 2017 18:43:50 GMT+0000",
-    "dateModified": "Tue Feb 27 2018 16:26:45 GMT+0800",
+    "dateModified": "Thu May 24 2018 10:32:32 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "Tengdw",
@@ -494,11 +499,362 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <p>实现了准确下子、黑白交替下子、移动窗口棋子不会丢失、五连子判定、重新开始、悔棋</p>
-<h2 id="Chess-java"><a href="#Chess-java" class="headerlink" title="Chess.java"></a>Chess.java</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package com.review;</span><br><span class="line"></span><br><span class="line">public class Chess &#123;</span><br><span class="line">	public int x,y;</span><br><span class="line">	public boolean isBlack;//表示是黑还是白</span><br><span class="line">	public static int chessWidth=30;//棋子大小</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public int hashCode() &#123;</span><br><span class="line">		return 1;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public boolean equals(Object obj) &#123;</span><br><span class="line">		if(this==obj)&#123;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">		if(obj instanceof Chess)&#123;</span><br><span class="line">			Chess c=(Chess) obj;</span><br><span class="line">			if(c.x==this.x &amp;&amp; c.y==this.y)&#123;</span><br><span class="line">				return true;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="GameFrame-java"><a href="#GameFrame-java" class="headerlink" title="GameFrame.java"></a>GameFrame.java</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">package com.hp.review;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import java.awt.event.ActionEvent;</span><br><span class="line">import java.awt.event.ActionListener;</span><br><span class="line">import java.awt.event.MouseEvent;</span><br><span class="line">import java.awt.event.MouseListener;</span><br><span class="line"></span><br><span class="line">import javax.swing.JMenu;</span><br><span class="line">import javax.swing.JMenuBar;</span><br><span class="line">import javax.swing.JMenuItem;</span><br><span class="line">import javax.swing.JPanel;</span><br><span class="line"></span><br><span class="line">import com.hp.test.Test;</span><br><span class="line"></span><br><span class="line">public class GameFrame extends MainFrame &#123;</span><br><span class="line">	private GamePanel gp;</span><br><span class="line">	public GameFrame()&#123;</span><br><span class="line">		//创建面板对象</span><br><span class="line">		gp=new GamePanel();</span><br><span class="line">		add(gp);</span><br><span class="line">		//JPanel jp = (JPanel) getContentPane();</span><br><span class="line">		//添加菜单栏</span><br><span class="line">		JMenuBar jmb = new JMenuBar();</span><br><span class="line">		setJMenuBar(jmb);</span><br><span class="line">		JMenu jm = new JMenu(&quot;选项&quot;);</span><br><span class="line">		jmb.add(jm);</span><br><span class="line">		//为菜单添加子菜单</span><br><span class="line">		JMenuItem jmi1 = new JMenuItem(&quot;重新开始&quot;);</span><br><span class="line">		JMenuItem jmi2 = new JMenuItem(&quot;悔棋&quot;);</span><br><span class="line">		jm.add(jmi1);</span><br><span class="line">		jm.add(jmi2);</span><br><span class="line">		jmi1.addActionListener(new ActionListener() &#123;</span><br><span class="line">			@Override</span><br><span class="line">			public void actionPerformed(ActionEvent e) &#123;</span><br><span class="line">				gp.restartGame();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		jmi2.addActionListener(new ActionListener() &#123;</span><br><span class="line">			@Override</span><br><span class="line">			public void actionPerformed(ActionEvent e) &#123;</span><br><span class="line">				gp.backPreviousStep();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Test.setDebug(true);</span><br><span class="line">		new GameFrame();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="GamePanel-java"><a href="#GamePanel-java" class="headerlink" title="GamePanel.java"></a>GamePanel.java</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br></pre></td><td class="code"><pre><span class="line">package com.hp.review;</span><br><span class="line"></span><br><span class="line">import java.awt.Color;</span><br><span class="line">import java.awt.Graphics;</span><br><span class="line">import java.awt.Point;</span><br><span class="line">import java.awt.event.MouseEvent;</span><br><span class="line">import java.awt.event.MouseListener;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import javax.swing.JOptionPane;</span><br><span class="line">import javax.swing.JPanel;</span><br><span class="line"></span><br><span class="line">import com.hp.test.Test;</span><br><span class="line"></span><br><span class="line">public class GamePanel extends JPanel implements MouseListener &#123;</span><br><span class="line">	private int boxWidth = 48;// 每个格子的宽高</span><br><span class="line">	private int startX = 20, stratY = 20;// 棋盘绘制的起点坐标</span><br><span class="line">	private int hengNum = 10, shuNum = 10;// henNum表示多少行，shuNum表示多少列</span><br><span class="line">	private int hang,lie;</span><br><span class="line">	private boolean flag = true;// 控制绘制黑棋还是白棋的变量，为true绘制黑棋，为false绘制白棋</span><br><span class="line">	private boolean isWin = false; // 如果有人胜利isWin赋值为true</span><br><span class="line">	private List&lt;Chess&gt; chesses;</span><br><span class="line">	// 指定行列值为0，则认为没有落子，如果为1咯黑子，2落了白字</span><br><span class="line">	private int arr[][] = new int[hengNum + 1][shuNum + 1];// 存储棋盘上每一个交叉点信息的二维数组，hengNum=10,shuNum=10但是有11*11个点</span><br><span class="line"></span><br><span class="line">	// 低耦合，高内聚</span><br><span class="line">	public GamePanel() &#123;</span><br><span class="line">		chesses = new ArrayList&lt;Chess&gt;();</span><br><span class="line">		setBackground(Color.YELLOW);</span><br><span class="line">		addMouseListener(this);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void paint(Graphics g) &#123;</span><br><span class="line"></span><br><span class="line">		super.paint(g);// 绘制面板本身</span><br><span class="line">		// 绘制棋盘</span><br><span class="line">		// 画10条横线</span><br><span class="line">		for (int i = 0; i &lt;= hengNum; i++) &#123;</span><br><span class="line">			g.drawLine(startX, stratY + i * boxWidth, shuNum * boxWidth</span><br><span class="line">					+ startX, stratY + i * boxWidth);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		// 绘制10竖线</span><br><span class="line">		for (int i = 0; i &lt;= shuNum; i++) &#123;</span><br><span class="line">			g.drawLine(startX + i * boxWidth, stratY, startX + i * boxWidth,</span><br><span class="line">					hengNum * boxWidth + stratY);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		// 在paint方法中绘制棋子保证最小化以后不丢失</span><br><span class="line">		for (int i = 0; i &lt; chesses.size(); i++) &#123;</span><br><span class="line">			Chess c = chesses.get(i);</span><br><span class="line">			g.setColor(c.isBlack == true ? Color.black : Color.white);</span><br><span class="line">			g.fillOval(c.x, c.y, c.chessWidth, c.chessWidth);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 点击</span><br><span class="line">	public void mouseClicked(MouseEvent e) &#123;</span><br><span class="line">		// 如果有人获胜了不会执行此方法</span><br><span class="line">		if (isWin) &#123;</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		Graphics g = getGraphics();</span><br><span class="line">		Point p = e.getPoint();// 鼠标点击点的坐标</span><br><span class="line">		// 排除棋盘外的点击</span><br><span class="line">		if (p.x &lt; startX || p.y &lt; stratY || p.x &gt; (startX + boxWidth * shuNum)</span><br><span class="line">				|| p.y &gt; (stratY + boxWidth * hengNum)) &#123;</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		// 确定落子的行和列</span><br><span class="line">		hang = (int) Math.round((p.y - stratY) * 1.0 / boxWidth);</span><br><span class="line">		lie = (int) Math.round((p.x - startX) * 1.0 / boxWidth);</span><br><span class="line">		Test.print(hang + &quot;   &quot; + lie);</span><br><span class="line"></span><br><span class="line">		// 确定落子交叉点的坐标</span><br><span class="line">		int x = lie * boxWidth + startX - Chess.chessWidth / 2;</span><br><span class="line">		int y = hang * boxWidth + stratY - Chess.chessWidth / 2;</span><br><span class="line">		// 落子</span><br><span class="line">		// if(flag)&#123;</span><br><span class="line">		// g.setColor(new Color(0x000000));</span><br><span class="line">		// &#125;else&#123;</span><br><span class="line">		// g.setColor(new Color(0xFFFFFF));</span><br><span class="line">		// &#125;</span><br><span class="line"></span><br><span class="line">		// 将绘制的棋子存储到集合中</span><br><span class="line">		Chess c = new Chess();</span><br><span class="line">		c.x = x;</span><br><span class="line">		c.y = y;</span><br><span class="line">		c.isBlack = flag;</span><br><span class="line">		if (!chesses.contains(c)) &#123;</span><br><span class="line">			g.setColor(flag == true ? Color.BLACK : Color.WHITE);</span><br><span class="line">			g.fillOval(x, y, Chess.chessWidth, Chess.chessWidth);</span><br><span class="line">			arr[hang][lie] = c.isBlack == true ? 1 : 2;</span><br><span class="line">			chesses.add(c);</span><br><span class="line">			flag = !flag;// 必须放在循环内</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		// 打印输出二维数组的值</span><br><span class="line">		System.out.println();</span><br><span class="line">		for (int i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">			for (int j = 0; j &lt; arr[i].length; j++) &#123;</span><br><span class="line">				Test.print(arr[i][j] + &quot;  &quot;);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		for (int i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">			for (int j = 0; j &lt; arr[i].length; j++) &#123;</span><br><span class="line">				// 横向判断</span><br><span class="line">				if (j &lt;= arr[i].length - 5) &#123;</span><br><span class="line">					if (arr[i][j] == 1 &amp;&amp; arr[i][j + 1] == 1</span><br><span class="line">							&amp;&amp; arr[i][j + 2] == 1 &amp;&amp; arr[i][j + 3] == 1</span><br><span class="line">							&amp;&amp; arr[i][j + 4] == 1) &#123;</span><br><span class="line">						System.out.println(&quot;黑棋胜利&quot;);</span><br><span class="line">						this.blackWin();</span><br><span class="line">						isWin = true;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">					if (arr[i][j] == 2 &amp;&amp; arr[i][j + 1] == 2</span><br><span class="line">							&amp;&amp; arr[i][j + 2] == 2 &amp;&amp; arr[i][j + 3] == 2</span><br><span class="line">							&amp;&amp; arr[i][j + 4] == 2) &#123;</span><br><span class="line">						System.out.println(&quot;白棋胜利&quot;);</span><br><span class="line">						this.whiteWin();</span><br><span class="line">						isWin = true;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				// 竖向判断</span><br><span class="line">				if (i &lt;= arr.length - 5) &#123;</span><br><span class="line">					if (arr[i][j] == 1 &amp;&amp; arr[i + 1][j] == 1</span><br><span class="line">							&amp;&amp; arr[i + 2][j] == 1 &amp;&amp; arr[i + 3][j] == 1</span><br><span class="line">							&amp;&amp; arr[i + 4][j] == 1) &#123;</span><br><span class="line">						System.out.println(&quot;黑棋胜利&quot;);</span><br><span class="line">						this.blackWin();</span><br><span class="line">						isWin = true;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">					if (arr[i][j] == 2 &amp;&amp; arr[i + 1][j] == 2</span><br><span class="line">							&amp;&amp; arr[i + 2][j] == 2 &amp;&amp; arr[i + 3][j] == 2</span><br><span class="line">							&amp;&amp; arr[i + 4][j] == 2) &#123;</span><br><span class="line">						System.out.println(&quot;白棋胜利&quot;);</span><br><span class="line">						this.whiteWin();</span><br><span class="line">						isWin = true;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				// /向判断,只判断右上角6*6的正方形内的所有点或者左下角6*6的正方形内的所有点</span><br><span class="line">				if (j &gt;= 4 &amp;&amp; i &lt;= arr.length - 5) &#123;</span><br><span class="line">					if (arr[i][j] == 1 &amp;&amp; arr[i + 1][j - 1] == 1</span><br><span class="line">							&amp;&amp; arr[i + 2][j - 2] == 1 &amp;&amp; arr[i + 3][j - 3] == 1</span><br><span class="line">							&amp;&amp; arr[i + 4][j - 4] == 1) &#123;</span><br><span class="line">						System.out.println(&quot;黑棋胜利&quot;);</span><br><span class="line">						this.blackWin();</span><br><span class="line">						isWin = true;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">					if (arr[i][j] == 2 &amp;&amp; arr[i + 1][j - 1] == 2</span><br><span class="line">							&amp;&amp; arr[i + 2][j - 2] == 2 &amp;&amp; arr[i + 3][j - 3] == 2</span><br><span class="line">							&amp;&amp; arr[i + 4][j - 4] == 2) &#123;</span><br><span class="line">						System.out.println(&quot;白棋胜利&quot;);</span><br><span class="line">						this.whiteWin();</span><br><span class="line">						isWin = true;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				// \向判断，只判断左下角6*6的正方形内的所有点</span><br><span class="line">				if (i &lt;= arr.length - 5 &amp;&amp; j &lt;= arr[i].length - 5) &#123;</span><br><span class="line">					if (arr[i][j] == 1 &amp;&amp; arr[i + 1][j + 1] == 1</span><br><span class="line">							&amp;&amp; arr[i + 2][j + 2] == 1 &amp;&amp; arr[i + 3][j + 3] == 1</span><br><span class="line">							&amp;&amp; arr[i + 4][j + 4] == 1) &#123;</span><br><span class="line">						System.out.println(&quot;黑棋胜利&quot;);</span><br><span class="line">						this.blackWin();</span><br><span class="line">						isWin = true;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">					if (arr[i][j] == 2 &amp;&amp; arr[i + 1][j + 1] == 2</span><br><span class="line">							&amp;&amp; arr[i + 2][j + 2] == 2 &amp;&amp; arr[i + 3][j + 3] == 2</span><br><span class="line">							&amp;&amp; arr[i + 4][j + 4] == 2) &#123;</span><br><span class="line">						System.out.println(&quot;白棋胜利&quot;);</span><br><span class="line">						this.whiteWin();</span><br><span class="line">						isWin = true;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void mouseEntered(MouseEvent e) &#123;&#125;</span><br><span class="line">	public void mouseExited(MouseEvent e) &#123;&#125;</span><br><span class="line">	public void mousePressed(MouseEvent e) &#123;&#125;</span><br><span class="line">	public void mouseReleased(MouseEvent e) &#123;&#125;</span><br><span class="line"></span><br><span class="line">	public void blackWin() &#123;</span><br><span class="line">		Object[] options = &#123; &quot;确定&quot;, &quot;再玩一把&quot; &#125;;</span><br><span class="line">		int i = JOptionPane.showOptionDialog(null, &quot;黑棋获胜&quot;, &quot;游戏结束&quot;,</span><br><span class="line">				JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE, null,</span><br><span class="line">				options, null);</span><br><span class="line">		// 点确定返回0，点在玩一把返回1</span><br><span class="line">		if (i == 1) &#123;</span><br><span class="line">			this.restartGame();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void whiteWin() &#123;</span><br><span class="line">		Object[] options = &#123; &quot;确定&quot;, &quot;再玩一把&quot; &#125;;</span><br><span class="line">		int i = JOptionPane.showOptionDialog(null, &quot;白棋获胜&quot;, &quot;游戏结束&quot;,</span><br><span class="line">				JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE, null,</span><br><span class="line">				options, null);</span><br><span class="line">		// 点确定返回0，点在玩一把返回1</span><br><span class="line">		if (i == 1) &#123;</span><br><span class="line">			this.restartGame();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void restartGame() &#123;</span><br><span class="line">		// 清空数组</span><br><span class="line">		chesses.clear();</span><br><span class="line">		arr = null;</span><br><span class="line">		arr = new int[hengNum + 1][shuNum + 1];</span><br><span class="line">		flag = true;</span><br><span class="line">		isWin=false;</span><br><span class="line">		this.paint(getGraphics());</span><br><span class="line">	&#125;</span><br><span class="line">	//悔棋</span><br><span class="line">	public void backPreviousStep() &#123;</span><br><span class="line">		//移除最后下的一个棋子，更改棋盘信息</span><br><span class="line">		if(!chesses.isEmpty())&#123;</span><br><span class="line">			chesses.remove(chesses.size()-1);</span><br><span class="line">			arr[hang][lie]=0;</span><br><span class="line">			this.paint(getGraphics());</span><br><span class="line">			isWin=false; //胜利后悔棋了，还能继续下</span><br><span class="line">			//悔棋后下的棋子的颜色与悔的那粒一样</span><br><span class="line">			flag = flag==true?false:true;</span><br><span class="line">//			if (flag) &#123;</span><br><span class="line">//				flag=false;</span><br><span class="line">//			&#125; else &#123;</span><br><span class="line">//				flag=true;</span><br><span class="line">//			&#125;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="MainFrame-java"><a href="#MainFrame-java" class="headerlink" title="MainFrame.java"></a>MainFrame.java</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package com.review;</span><br><span class="line"></span><br><span class="line">import java.awt.Color;</span><br><span class="line">import java.awt.Container;</span><br><span class="line"></span><br><span class="line">import javax.swing.JFrame;</span><br><span class="line">import javax.swing.JPanel;</span><br><span class="line"></span><br><span class="line">public class MainFrame extends JFrame&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	public MainFrame()&#123;</span><br><span class="line">		setTitle(&quot;五子棋&quot;);</span><br><span class="line">		setSize(500, 500);</span><br><span class="line">		setResizable(false);//设置大小不可变</span><br><span class="line">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span><br><span class="line">		getContentPane().setBackground(new Color(0xFF0000));</span><br><span class="line">		setLocationRelativeTo(null);//设置居中</span><br><span class="line">		setVisible(true);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Chess-java"><a href="#Chess-java" class="headerlink" title="Chess.java"></a>Chess.java</h2><pre><code class="java">package com.review;
 
+public class Chess {
+    public int x,y;
+    public boolean isBlack;//表示是黑还是白
+    public static int chessWidth=30;//棋子大小
+
+    @Override
+    public int hashCode() {
+        return 1;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this==obj){
+            return true;
+        }
+        if(obj instanceof Chess){
+            Chess c=(Chess) obj;
+            if(c.x==this.x &amp;&amp; c.y==this.y){
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+</code></pre>
+<h2 id="GameFrame-java"><a href="#GameFrame-java" class="headerlink" title="GameFrame.java"></a>GameFrame.java</h2><pre><code class="java">package com.hp.review;
+
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+
+import com.hp.test.Test;
+
+public class GameFrame extends MainFrame {
+    private GamePanel gp;
+    public GameFrame(){
+        //创建面板对象
+        gp=new GamePanel();
+        add(gp);
+        //JPanel jp = (JPanel) getContentPane();
+        //添加菜单栏
+        JMenuBar jmb = new JMenuBar();
+        setJMenuBar(jmb);
+        JMenu jm = new JMenu(&quot;选项&quot;);
+        jmb.add(jm);
+        //为菜单添加子菜单
+        JMenuItem jmi1 = new JMenuItem(&quot;重新开始&quot;);
+        JMenuItem jmi2 = new JMenuItem(&quot;悔棋&quot;);
+        jm.add(jmi1);
+        jm.add(jmi2);
+        jmi1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gp.restartGame();
+            }
+        });
+        jmi2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gp.backPreviousStep();
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        Test.setDebug(true);
+        new GameFrame();
+    }
+}
+
+
+</code></pre>
+<h2 id="GamePanel-java"><a href="#GamePanel-java" class="headerlink" title="GamePanel.java"></a>GamePanel.java</h2><pre><code>package com.hp.review;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import com.hp.test.Test;
+
+public class GamePanel extends JPanel implements MouseListener {
+    private int boxWidth = 48;// 每个格子的宽高
+    private int startX = 20, stratY = 20;// 棋盘绘制的起点坐标
+    private int hengNum = 10, shuNum = 10;// henNum表示多少行，shuNum表示多少列
+    private int hang,lie;
+    private boolean flag = true;// 控制绘制黑棋还是白棋的变量，为true绘制黑棋，为false绘制白棋
+    private boolean isWin = false; // 如果有人胜利isWin赋值为true
+    private List&lt;Chess&gt; chesses;
+    // 指定行列值为0，则认为没有落子，如果为1咯黑子，2落了白字
+    private int arr[][] = new int[hengNum + 1][shuNum + 1];// 存储棋盘上每一个交叉点信息的二维数组，hengNum=10,shuNum=10但是有11*11个点
+
+    // 低耦合，高内聚
+    public GamePanel() {
+        chesses = new ArrayList&lt;Chess&gt;();
+        setBackground(Color.YELLOW);
+        addMouseListener(this);
+    }
+
+    public void paint(Graphics g) {
+
+        super.paint(g);// 绘制面板本身
+        // 绘制棋盘
+        // 画10条横线
+        for (int i = 0; i &lt;= hengNum; i++) {
+            g.drawLine(startX, stratY + i * boxWidth, shuNum * boxWidth
+                    + startX, stratY + i * boxWidth);
+        }
+
+        // 绘制10竖线
+        for (int i = 0; i &lt;= shuNum; i++) {
+            g.drawLine(startX + i * boxWidth, stratY, startX + i * boxWidth,
+                    hengNum * boxWidth + stratY);
+        }
+
+        // 在paint方法中绘制棋子保证最小化以后不丢失
+        for (int i = 0; i &lt; chesses.size(); i++) {
+            Chess c = chesses.get(i);
+            g.setColor(c.isBlack == true ? Color.black : Color.white);
+            g.fillOval(c.x, c.y, c.chessWidth, c.chessWidth);
+        }
+    }
+
+    // 点击
+    public void mouseClicked(MouseEvent e) {
+        // 如果有人获胜了不会执行此方法
+        if (isWin) {
+            return;
+        }
+        Graphics g = getGraphics();
+        Point p = e.getPoint();// 鼠标点击点的坐标
+        // 排除棋盘外的点击
+        if (p.x &lt; startX || p.y &lt; stratY || p.x &gt; (startX + boxWidth * shuNum)
+                || p.y &gt; (stratY + boxWidth * hengNum)) {
+            return;
+        }
+        // 确定落子的行和列
+        hang = (int) Math.round((p.y - stratY) * 1.0 / boxWidth);
+        lie = (int) Math.round((p.x - startX) * 1.0 / boxWidth);
+        Test.print(hang + &quot;   &quot; + lie);
+
+        // 确定落子交叉点的坐标
+        int x = lie * boxWidth + startX - Chess.chessWidth / 2;
+        int y = hang * boxWidth + stratY - Chess.chessWidth / 2;
+        // 落子
+        // if(flag){
+        // g.setColor(new Color(0x000000));
+        // }else{
+        // g.setColor(new Color(0xFFFFFF));
+        // }
+
+        // 将绘制的棋子存储到集合中
+        Chess c = new Chess();
+        c.x = x;
+        c.y = y;
+        c.isBlack = flag;
+        if (!chesses.contains(c)) {
+            g.setColor(flag == true ? Color.BLACK : Color.WHITE);
+            g.fillOval(x, y, Chess.chessWidth, Chess.chessWidth);
+            arr[hang][lie] = c.isBlack == true ? 1 : 2;
+            chesses.add(c);
+            flag = !flag;// 必须放在循环内
+        }
+
+        // 打印输出二维数组的值
+        System.out.println();
+        for (int i = 0; i &lt; arr.length; i++) {
+            for (int j = 0; j &lt; arr[i].length; j++) {
+                Test.print(arr[i][j] + &quot;  &quot;);
+            }
+            System.out.println();
+        }
+
+        for (int i = 0; i &lt; arr.length; i++) {
+            for (int j = 0; j &lt; arr[i].length; j++) {
+                // 横向判断
+                if (j &lt;= arr[i].length - 5) {
+                    if (arr[i][j] == 1 &amp;&amp; arr[i][j + 1] == 1
+                            &amp;&amp; arr[i][j + 2] == 1 &amp;&amp; arr[i][j + 3] == 1
+                            &amp;&amp; arr[i][j + 4] == 1) {
+                        System.out.println(&quot;黑棋胜利&quot;);
+                        this.blackWin();
+                        isWin = true;
+                        break;
+                    }
+                    if (arr[i][j] == 2 &amp;&amp; arr[i][j + 1] == 2
+                            &amp;&amp; arr[i][j + 2] == 2 &amp;&amp; arr[i][j + 3] == 2
+                            &amp;&amp; arr[i][j + 4] == 2) {
+                        System.out.println(&quot;白棋胜利&quot;);
+                        this.whiteWin();
+                        isWin = true;
+                        break;
+                    }
+                }
+                // 竖向判断
+                if (i &lt;= arr.length - 5) {
+                    if (arr[i][j] == 1 &amp;&amp; arr[i + 1][j] == 1
+                            &amp;&amp; arr[i + 2][j] == 1 &amp;&amp; arr[i + 3][j] == 1
+                            &amp;&amp; arr[i + 4][j] == 1) {
+                        System.out.println(&quot;黑棋胜利&quot;);
+                        this.blackWin();
+                        isWin = true;
+                        break;
+                    }
+                    if (arr[i][j] == 2 &amp;&amp; arr[i + 1][j] == 2
+                            &amp;&amp; arr[i + 2][j] == 2 &amp;&amp; arr[i + 3][j] == 2
+                            &amp;&amp; arr[i + 4][j] == 2) {
+                        System.out.println(&quot;白棋胜利&quot;);
+                        this.whiteWin();
+                        isWin = true;
+                        break;
+                    }
+                }
+                // /向判断,只判断右上角6*6的正方形内的所有点或者左下角6*6的正方形内的所有点
+                if (j &gt;= 4 &amp;&amp; i &lt;= arr.length - 5) {
+                    if (arr[i][j] == 1 &amp;&amp; arr[i + 1][j - 1] == 1
+                            &amp;&amp; arr[i + 2][j - 2] == 1 &amp;&amp; arr[i + 3][j - 3] == 1
+                            &amp;&amp; arr[i + 4][j - 4] == 1) {
+                        System.out.println(&quot;黑棋胜利&quot;);
+                        this.blackWin();
+                        isWin = true;
+                        break;
+                    }
+                    if (arr[i][j] == 2 &amp;&amp; arr[i + 1][j - 1] == 2
+                            &amp;&amp; arr[i + 2][j - 2] == 2 &amp;&amp; arr[i + 3][j - 3] == 2
+                            &amp;&amp; arr[i + 4][j - 4] == 2) {
+                        System.out.println(&quot;白棋胜利&quot;);
+                        this.whiteWin();
+                        isWin = true;
+                        break;
+                    }
+                }
+                // \向判断，只判断左下角6*6的正方形内的所有点
+                if (i &lt;= arr.length - 5 &amp;&amp; j &lt;= arr[i].length - 5) {
+                    if (arr[i][j] == 1 &amp;&amp; arr[i + 1][j + 1] == 1
+                            &amp;&amp; arr[i + 2][j + 2] == 1 &amp;&amp; arr[i + 3][j + 3] == 1
+                            &amp;&amp; arr[i + 4][j + 4] == 1) {
+                        System.out.println(&quot;黑棋胜利&quot;);
+                        this.blackWin();
+                        isWin = true;
+                        break;
+                    }
+                    if (arr[i][j] == 2 &amp;&amp; arr[i + 1][j + 1] == 2
+                            &amp;&amp; arr[i + 2][j + 2] == 2 &amp;&amp; arr[i + 3][j + 3] == 2
+                            &amp;&amp; arr[i + 4][j + 4] == 2) {
+                        System.out.println(&quot;白棋胜利&quot;);
+                        this.whiteWin();
+                        isWin = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {}
+
+    public void blackWin() {
+        Object[] options = { &quot;确定&quot;, &quot;再玩一把&quot; };
+        int i = JOptionPane.showOptionDialog(null, &quot;黑棋获胜&quot;, &quot;游戏结束&quot;,
+                JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE, null,
+                options, null);
+        // 点确定返回0，点在玩一把返回1
+        if (i == 1) {
+            this.restartGame();
+        }
+    }
+
+    public void whiteWin() {
+        Object[] options = { &quot;确定&quot;, &quot;再玩一把&quot; };
+        int i = JOptionPane.showOptionDialog(null, &quot;白棋获胜&quot;, &quot;游戏结束&quot;,
+                JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE, null,
+                options, null);
+        // 点确定返回0，点在玩一把返回1
+        if (i == 1) {
+            this.restartGame();
+        }
+    }
+
+    public void restartGame() {
+        // 清空数组
+        chesses.clear();
+        arr = null;
+        arr = new int[hengNum + 1][shuNum + 1];
+        flag = true;
+        isWin=false;
+        this.paint(getGraphics());
+    }
+    //悔棋
+    public void backPreviousStep() {
+        //移除最后下的一个棋子，更改棋盘信息
+        if(!chesses.isEmpty()){
+            chesses.remove(chesses.size()-1);
+            arr[hang][lie]=0;
+            this.paint(getGraphics());
+            isWin=false; //胜利后悔棋了，还能继续下
+            //悔棋后下的棋子的颜色与悔的那粒一样
+            flag = flag==true?false:true;
+//            if (flag) {
+//                flag=false;
+//            } else {
+//                flag=true;
+//            }
+        }else{
+            return;
+        }
+
+    }
+}
+
+
+</code></pre><h2 id="MainFrame-java"><a href="#MainFrame-java" class="headerlink" title="MainFrame.java"></a>MainFrame.java</h2><pre><code>package com.review;
+
+import java.awt.Color;
+import java.awt.Container;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class MainFrame extends JFrame{
+
+
+
+    public MainFrame(){
+        setTitle(&quot;五子棋&quot;);
+        setSize(500, 500);
+        setResizable(false);//设置大小不可变
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getContentPane().setBackground(new Color(0xFF0000));
+        setLocationRelativeTo(null);//设置居中
+        setVisible(true);
+    }
+
+}
+
+</code></pre>
         
     
 
@@ -914,6 +1270,12 @@
 
 <!-- Import prettify js  -->
 
+    
+        
+            <script>lsloader.load("prettify_js","https://cdn.bootcss.com/prettify/r298/prettify.js", true)</script>
+        
+    
+
 
 
 <!-- Window Load -->
@@ -924,6 +1286,13 @@
         $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
     });
 
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
     
     
 </script>

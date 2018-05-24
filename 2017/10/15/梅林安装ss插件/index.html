@@ -98,6 +98,11 @@
         <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?MKetZV3cUTfDxvMffaOezg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
 
     
 
@@ -487,8 +492,12 @@
         <p>前几天给K3刷了梅林固件（LEDE用起来太麻烦了），由于现在严查番羽墙梅林软件中心的ss插件被迫下架了，所以需要手动安装</p>
 <ol>
 <li>先启用梅林的SSH：系统管理-&gt;系统设置-&gt;SSH Daemon-&gt;Allow SSH Port Forwarding 选是再点击应用本页面设置</li>
-<li>用SSH客户端登录（地址：路由器的默认网关；用户名：默认是admin；密码：路由器的管理密码）然后一句一句执行下面命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget http://valleyecho-1252960615.cosgz.myqcloud.com/shadowsocks.tar.gz</span><br><span class="line">tar -zxvf /tmp//shadowsocks.tar.gz    #解压</span><br><span class="line">chmod +x /tmp/shadowsocks/install.sh    #授予执行权限</span><br><span class="line">sh /tmp/shadowsocks/install.sh    #执行</span><br></pre></td></tr></table></figure>
-</li>
+<li>用SSH客户端登录（地址：路由器的默认网关；用户名：默认是admin；密码：路由器的管理密码）然后一句一句执行下面命令<pre><code>cd /tmp
+wget http://valleyecho-1252960615.cosgz.myqcloud.com/shadowsocks.tar.gz
+tar -zxvf /tmp//shadowsocks.tar.gz    #解压
+chmod +x /tmp/shadowsocks/install.sh    #授予执行权限
+sh /tmp/shadowsocks/install.sh    #执行
+</code></pre></li>
 </ol>
 
         
@@ -906,6 +915,12 @@
 
 <!-- Import prettify js  -->
 
+    
+        
+            <script>lsloader.load("prettify_js","https://cdn.bootcss.com/prettify/r298/prettify.js", true)</script>
+        
+    
+
 
 
 <!-- Window Load -->
@@ -916,6 +931,13 @@
         $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
     });
 
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
     
     
 </script>

@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title>自定义注解加AOP实现日志记录</title>
+      <link href="/2018/06/25/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3%E5%8A%A0AOP%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/"/>
+      <url>/2018/06/25/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3%E5%8A%A0AOP%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/</url>
+      <content type="html"><![CDATA[<h2 id="需要的依赖"><a href="#需要的依赖" class="headerlink" title="需要的依赖"></a>需要的依赖</h2><pre><code class="xml">&lt;parent&gt;    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;    &lt;version&gt;1.5.6.RELEASE&lt;/version&gt;&lt;/parent&gt;</code></pre><h2 id="注解类"><a href="#注解类" class="headerlink" title="注解类"></a>注解类</h2><pre><code class="java">import java.lang.annotation.Retention;import java.lang.annotation.ElementType;import java.lang.annotation.Target;import java.lang.annotation.RetentionPolicy;@Target(ElementType.METHOD)@Retention(RetentionPolicy.RUNTIME)public @interface Log {    String value() default &quot;&quot;;}</code></pre><h2 id="切面类"><a href="#切面类" class="headerlink" title="切面类"></a>切面类</h2><pre><code class="java">import java.lang.reflect.Method;import java.util.Date;import javax.servlet.http.HttpServletRequest;import org.aspectj.lang.ProceedingJoinPoint;import org.aspectj.lang.annotation.Around;import org.aspectj.lang.annotation.Aspect;import org.aspectj.lang.annotation.Pointcut;import org.aspectj.lang.reflect.MethodSignature;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Component;import com.qh.common.annotation.Log;import com.qh.common.dao.LogDao;import com.qh.common.domain.LogDO;import com.qh.common.utils.HttpContextUtils;import com.qh.common.utils.IPUtils;import com.qh.common.utils.JSONUtils;import com.qh.common.utils.ShiroUtils;import com.qh.system.domain.UserDO;@Aspect@Componentpublic class LogAspect {    @Autowired    LogDao logMapper;    // @Pointcut 注解使用 &amp;&amp; || ！（写成 and or not也行） 可以匹配多条规则    // @within(com.qh.common.annotation.Log) 可以匹配类上的 @Log 注解，此时环绕方法也要做相应的改变    @Pointcut(&quot;@annotation(com.qh.common.annotation.Log) || @within(com.qh.common.annotation.Log)&quot;)    public void logPointCut() {    }    @Around(&quot;logPointCut()&quot;)    public Object around(ProceedingJoinPoint point) throws Throwable {        long beginTime = System.currentTimeMillis();        // 执行方法        Object result = point.proceed();        // 执行时长(毫秒)        long time = System.currentTimeMillis() - beginTime;        // 保存日志        saveLog(point, time);        return result;    }    private void saveLog(ProceedingJoinPoint joinPoint, long time) {        MethodSignature signature = (MethodSignature) joinPoint.getSignature();        Method method = signature.getMethod();        LogDO sysLog = new LogDO();        Log syslog = method.getAnnotation(Log.class);        if (syslog != null) {            // 注解上的描述            sysLog.setOperation(syslog.value());        }        // 请求的方法名        String className = joinPoint.getTarget().getClass().getName();        String methodName = signature.getName();        sysLog.setMethod(className + &quot;.&quot; + methodName + &quot;()&quot;);        // 请求的参数        Object[] args = joinPoint.getArgs();        try {            String params = JSONUtils.beanToJson(args[0]).substring(0, 4999);            sysLog.setParams(params);        } catch (Exception e) {        }        // 获取request        HttpServletRequest request = HttpContextUtils.getHttpServletRequest();        // 设置IP地址        sysLog.setIp(IPUtils.getIpAddr(request));        // 用户名        UserDO currUser = ShiroUtils.getUser();        if (null == currUser) {            if (null != sysLog.getParams()) {                sysLog.setUserId(-1);                sysLog.setUsername(sysLog.getParams());            } else {                sysLog.setUserId(-1);                sysLog.setUsername(&quot;获取用户信息为空&quot;);            }        } else {            sysLog.setUserId(ShiroUtils.getUserId());            sysLog.setUsername(ShiroUtils.getUser().getUsername());        }        sysLog.setTime((int) time);        // 系统当前时间        Date date = new Date();        sysLog.setGmtCreate(date);        // 保存系统日志        logMapper.save(sysLog);    }}</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><pre><code>@Log(&quot;登录&quot;)@PostMapping(&quot;/login&quot;)@ResponseBodypublic ModelAndView ajaxLogin(@RequestParam(&quot;username&quot;) String username,      @RequestParam(&quot;password&quot;) Stringpassword, HttpSession session) {        // 。。。        }    }</code></pre>]]></content>
+      
+      <categories>
+          
+          <category> Java学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>IDEA 部署项目到 Docker</title>
       <link href="/2018/05/22/IDEA%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%E5%88%B0Docker/"/>
       <url>/2018/05/22/IDEA%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%E5%88%B0Docker/</url>
